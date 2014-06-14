@@ -263,7 +263,7 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	/**
 	 * Time:  Average = Worst = O(log(n))<br>
 	 * Space: Worst = O(log(n)) (Recursive)
-	 */	
+	 */
 	public void deleteMax() {
 		root = deleteMax(root);
 	}
