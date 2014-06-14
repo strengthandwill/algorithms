@@ -99,7 +99,7 @@ public class CrackingTheCodingInterviewC2Q1 {
 		hashtable.put((int) node.item, node.item);
 		while (node.next != null) {
 			int key = node.next.item;
-			if (!hashtable.containsKey(key)) { // first found
+			if (!hashtable.contains(key)) { // first found
 				hashtable.put(key, node.next.item);
 				node = node.next;
 			} else { // duplicate found

@@ -70,7 +70,7 @@ public class LinearProbingHashtable<K, V> implements HashtableAPI<K, V> {
 		}
 	}
 	
-	public boolean containsKey(K key) {
+	public boolean contains(K key) {
 		int i = hash(key);
 		while (keys[i] != null && keys[i].equals(key)) {
 			i = (i + 1) % m;

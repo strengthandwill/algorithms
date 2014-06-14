@@ -49,7 +49,7 @@ public class CrackingTheCodingInterviewC3Q3 {
 		
 		public SetOfStacks() { 
 			list = new ArrayList<StackWithCapacity<Integer>>();
-			list.add(new StackWithCapacity<Integer>());			
+			list.append(new StackWithCapacity<Integer>());			
 		}
 		
 		/**
@@ -58,7 +58,7 @@ public class CrackingTheCodingInterviewC3Q3 {
 		 */
 		public void push(int item) {
 			if (list.get(index).isFull()) {
-				list.add(new StackWithCapacity<Integer>());
+				list.append(new StackWithCapacity<Integer>());
 				index++;
 			}
 			list.get(index).push(item);
@@ -73,7 +73,7 @@ public class CrackingTheCodingInterviewC3Q3 {
 				return -1;
 			}
 			if (list.get(index).isEmpty()) {
-				list.remove(index);
+				list.delete(index);
 				index--;
 			}
 			return list.get(index).pop();
@@ -113,7 +113,7 @@ public class CrackingTheCodingInterviewC3Q3 {
 				list.get(i - 1).push(item);
 			}
 			if (list.get(this.index).isEmpty()) {				
-				list.remove(this.index);
+				list.delete(this.index);
 				this.index--;
 			}							
 		}
@@ -163,7 +163,7 @@ public class CrackingTheCodingInterviewC3Q3 {
 			if (size() == 1) {
 				return pop();
 			}
-			Node current = top;
+			Node current = first;
 			for (int i = 0; i < size - 2; i++) {
 				current = current.next;				
 			}

@@ -7,8 +7,8 @@ public class SimpleHashtable<K, V> implements HashtableAPI<K, V> {
 		hashtable.put(key, value);	
 	}
 
-	public boolean containsKey(K key) {		
-		return hashtable.containsKey(key);
+	public boolean contains(K key) {		
+		return hashtable.contains(key);
 	}
 	
 	public V get(K key) {

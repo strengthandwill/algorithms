@@ -3,6 +3,12 @@ package com.algomized.datastructures.stacks;
 /**
  * 
  * @author Poh Kah Kong
+ * 
+ * <p>
+ * Implemented using linked list. LIFO order.<br>
+ * <br>
+ * Space: Worst = O(n)
+ * </p>
  *
  */
 public class Stack<Item> implements StackAPI<Item> {
@@ -31,7 +37,7 @@ public class Stack<Item> implements StackAPI<Item> {
 		System.out.println(stack);
 	}
 	
-	protected Node top = null;
+	protected Node first = null;
 	protected int size = 0;
 	
 	class Node {
@@ -45,22 +51,24 @@ public class Stack<Item> implements StackAPI<Item> {
 	}
 	
 	/**
+	 * <b>Insert</b><br>
 	 * Time:  O(1)<br>
 	 * Space: O(1)
 	 */
 	public void push(Item item) {
-		top = new Node(item, top);
+		first = new Node(item, first);
 		size++;
 	}
 	
 	/**
+	 * <b>Delete</b><br>
 	 * Time:  O(1)<br>
 	 * Space: 1 item = O(1)
 	 */
 	public Item pop() {
-		if (top == null) return null;
-		Item item = top.item;
-		top = top.next;
+		if (first == null) return null;
+		Item item = first.item;
+		first = first.next;
 		size--;
 		return item;
 	}
@@ -70,14 +78,14 @@ public class Stack<Item> implements StackAPI<Item> {
 	 * Space: O(1)
 	 */	
 	public Item peek() {
-		if (top == null) {
+		if (first == null) {
 			return null;
 		}		
-		return top.item;
+		return first.item;
 	}
 	
 	public boolean isEmpty() {
-		return top == null;
+		return first == null;
 	}
 	
 	public int size() {
@@ -86,7 +94,7 @@ public class Stack<Item> implements StackAPI<Item> {
 	
 	public String toString() {
 		StringBuffer strBuf = new StringBuffer();
-		Node current = top;
+		Node current = first;
 		while (current != null) {
 			strBuf.append("[" + current.item + "]");
 			current = current.next;

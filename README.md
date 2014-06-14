@@ -6,7 +6,7 @@ The project contains the source code of some of the algorithm interview question
 
 ##Topics
 
-### Data Structure
+### Data Structures
 1. Arrays
 2. Hashtables
 3. Strings

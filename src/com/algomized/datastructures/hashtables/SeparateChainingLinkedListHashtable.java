@@ -21,7 +21,7 @@ public class SeparateChainingLinkedListHashtable<K, V> implements HashtableAPI<K
 	
 	public void put(K key, V value) {
 		int hash = hash(key);
-		if (!sequentialSearchST[hash].containsKey(key)) {
+		if (!sequentialSearchST[hash].contains(key)) {
 			n++;
 		}
 		sequentialSearchST[hash].put(key, value);
@@ -33,14 +33,14 @@ public class SeparateChainingLinkedListHashtable<K, V> implements HashtableAPI<K
 
 	public void remove(K key) {
 		int hash = hash(key);
-		if (sequentialSearchST[hash].containsKey(key)) {
+		if (sequentialSearchST[hash].contains(key)) {
 			n--;
 		}		
 		sequentialSearchST[hash].remove(key);
 	}
 	
-	public boolean containsKey(K key) {
-		return sequentialSearchST[hash(key)].containsKey(key);
+	public boolean contains(K key) {
+		return sequentialSearchST[hash(key)].contains(key);
 	}
 	
 	public boolean isEmpty() {

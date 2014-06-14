@@ -38,7 +38,7 @@ public class SequentialSearchLinkedListHashtable<K, V> implements HashtableAPI<K
 		return null; // search miss
 	}
 	
-	public boolean containsKey(K key) {
+	public boolean contains(K key) {
 		for (Node x= first; x != null; x = x.next) {
 			if (x.key.equals(key)) { // search hit
 				return true;

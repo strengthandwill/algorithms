@@ -55,7 +55,7 @@ public class CrackingTheCodingInterviewC1Q3 {
 				new SeparateChainingHashtable<Character, Integer>();
 		for (int i = 0; i < str1.length(); i++) { // stores chars and its count in str1
 			char c = str1.charAt(i);
-			if (!hashtable.containsKey(c)) {
+			if (!hashtable.contains(c)) {
 				hashtable.put(c, 1);
 			} else {
 				hashtable.put(c, hashtable.get(c) + 1);
@@ -63,7 +63,7 @@ public class CrackingTheCodingInterviewC1Q3 {
 		}
 		for (int i = 0; i < str2.length(); i++) { // check chars and its count in str2
 			char c = str2.charAt(i);
-			if (hashtable.containsKey(c)) { // char found
+			if (hashtable.contains(c)) { // char found
 				int count = hashtable.get(c);
 				if (count == 1) {
 					hashtable.remove(c);

@@ -1,17 +1,30 @@
 package com.algomized.datastructures.arrays;
 
-public class ArrayList<Item> {
+/**
+ * 
+ * @author Poh Kah Kong
+ *
+ * <p>
+ * Has low time complexity of an array and low space complexity of a linked list 
+ * which increases as it grows.<br>
+ * <br>
+ * Order is not important. <br>
+ * <br>
+ * Space: Worst = O(n)
+ * </p>
+ */
+public class ArrayList<Item> implements ArrayListAPI<Item> {
 	public static void main(String[] args) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		list.add(1);
-		list.add(2);
-		list.add(3);
-		list.add(4);
-		list.add(5);
+		list.append(1);
+		list.append(2);
+		list.append(3);
+		list.append(4);
+		list.insert(5);
 		System.out.println(list);
 		System.out.println(list.get(2));
 		
-		list.remove(2);
+		list.delete(2);
 		System.out.println(list);
 	}
 	
@@ -19,7 +32,7 @@ public class ArrayList<Item> {
 	private int size = 0;
 	
 	public ArrayList() {
-		this(1);
+		this(9);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -27,33 +40,62 @@ public class ArrayList<Item> {
 		buffer = (Item[]) new Object[cap];
 	}
 	
-	public void add(Item item) {
+	/**
+	 * <b>Insert</b><br>
+	 * Time:  Average = Worst = O(n) (Shifting)<br>
+	 * Space: Worst = O(n)
+	 */
+	public void insert(Item item) {
+		if (size > buffer.length / 2) {
+			resize(buffer.length * 2);
+		}		
+		shiftRight(0);
+		buffer[0] = item;
+		size++;
+	}
+	
+	/**
+	 * <b>Append</b><br>
+	 * Time:  Average = O(1), Worst = O(n) (resizing)<br>
+	 * Space: Worst = O(n) (resizing)
+	 */
+	public void append(Item item) {
 		if (size > buffer.length / 2) {
 			resize(buffer.length * 2);
 		}
 		buffer[size] = item;
 		size++;
-	}
+	}	
 	
-	public Item remove(int index) {
+	/**
+	 * <b>Delete</b><br>
+	 * Time:  Average = Worst = O(n) (Shifting)<br>
+	 * Space: Worst = O(n)
+	 */
+	public Item delete(int index) {
 		if (size == 0 || index < 0 || index >= size) {
 			return null;
 		}
 		Item item = buffer[index];
-		shift(index);
+		shiftLeft(index);
+		if (size < buffer.length / 4) {
+			resize(buffer.length / 2);
+		}		
 		return item;
 	}
 	
+	/**
+	 * <b>Search</b><br>
+	 * Time:  Average = Worst = O(1)<br>
+	 * Space: Worst = O(1)
+	 */
 	public Item get(int index) {
 		if (size == 0 || index < 0 || index >= size) {
 			return null;
 		}
-		if (size < buffer.length / 4) {
-			resize(buffer.length / 2);
-		}
 		return buffer[index];
 	}
-	
+		
 	public boolean isEmpty() {
 		return size == 0;
 	}
@@ -79,10 +121,17 @@ public class ArrayList<Item> {
 		buffer = newBuffer;
 	}
 	
-	private void shift(int index) {
+	private void shiftLeft(int index) {
 		for (int i = index; i < size - 1; i++) {
 			buffer[i] = buffer[i + 1];
 		}
 		size--;
 	}
+	
+	private void shiftRight(int index) {
+		for (int i = size - 1; i >= index; i--) {
+			buffer[i + 1] = buffer[i];
+		}
+		
+	}	
 }

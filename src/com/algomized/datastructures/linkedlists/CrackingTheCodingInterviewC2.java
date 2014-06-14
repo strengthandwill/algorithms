@@ -16,7 +16,8 @@ public class CrackingTheCodingInterviewC2 {
 	}
 
 	/**
-	 * Time:  O(1)
+	 * <b>Insert</b><br>
+	 * Time:  O(1)<br>
 	 * Space: 1 node = O(1) 
 	 */
 	public static Node<Integer> insert(Node<Integer> head, Integer item) {
@@ -27,7 +28,8 @@ public class CrackingTheCodingInterviewC2 {
 	}
 	
 	/**
-	 * Time:  O(n)
+	 * <b>Delete<b><br>
+	 * Time:  O(n)<br>
 	 * Space: O(1)
 	 */
 	public static Node<Integer> delete(Node<Integer> head, Integer item) {

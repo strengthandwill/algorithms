@@ -3,6 +3,15 @@ package com.algomized.datastructures.linkedlists;
 /**
  * 
  * @author Poh Kah Kong
+ * 
+ * <p>
+ * Has low space complexity but have high time complexity due to
+ * traversal of the linked list.<br>
+ * <br>
+ * Order is not important.<br>
+ * <br>
+ * Space: Worst = O(n)
+ * </p>
  *
  */
 public class Node<Item> {
@@ -23,7 +32,8 @@ public class Node<Item> {
 	}
 	
 	/**
-	 * Time:  O(n)
+	 * <b>Append</b><br>
+	 * Time:  O(n)<br>
 	 * Space: 1 node = O(1)
 	 */
 	public Node<Item> append(Item item) {
@@ -35,7 +45,7 @@ public class Node<Item> {
 		node.next = end;
 		return end;
 	}
-	
+		
 	public String toString() {
 		StringBuffer strBuf = new StringBuffer();
 		Node<Item> node = this;

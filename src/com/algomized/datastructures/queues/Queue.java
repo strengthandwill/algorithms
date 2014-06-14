@@ -3,6 +3,12 @@ package com.algomized.datastructures.queues;
 /**
  * 
  * @author Poh Kah Kong
+ * 
+ * <p>
+ * Implemented using linked list. FIFO order.<br>
+ * <br>
+ * Space: Worst = O(n)
+ * </p>
  *
  */
 public class Queue<Item> implements QueueAPI<Item> {
@@ -45,6 +51,7 @@ public class Queue<Item> implements QueueAPI<Item> {
 	}
 
 	/**
+	 * <b>Insert</b><br>
 	 * Time:  O(1)<br>
 	 * Space: 1 node = O(1)
 	 */
@@ -61,6 +68,7 @@ public class Queue<Item> implements QueueAPI<Item> {
 	}
 
 	/**
+	 * <b>Delete</b><br>
 	 * Time:  O(1)<br>
 	 * Space: 1 item = O(1)
 	 */	
