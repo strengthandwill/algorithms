@@ -1,14 +1,13 @@
 package com.algomized.datastructures.linkedlists;
 
-import com.algomized.datastructures.hashtables.HashtableAPI;
-import com.algomized.datastructures.hashtables.SimpleHashtable;
+import com.algomized.datastructures.hashtables.SeparateChainingHashtable;
 
 /**
  * 
  * @author Poh Kah Kong
  *
  * <p>
- * Write code to remove duplicates from an unsorted linked list.<br>
+ * Write code to delete duplicates from an unsorted linked list.<br>
  * FOLLOW UP<br>
  * How would you solve this problem if a temporary buffer is not allowed?
  * </p>
@@ -95,7 +94,7 @@ public class CrackingTheCodingInterviewC2Q1 {
 	 */
 	public static void removeDuplicatesUsingHashtable(Node<Character> node) {
 		if (node == null || node.next == null) return;
-		HashtableAPI<Integer, Character> hashtable = new SimpleHashtable<Integer, Character>();
+		SeparateChainingHashtable<Integer, Character> hashtable = new SeparateChainingHashtable<Integer, Character>();
 		hashtable.put((int) node.item, node.item);
 		while (node.next != null) {
 			int key = node.next.item;

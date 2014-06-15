@@ -1,5 +1,7 @@
 package com.algomized.datastructures.stacks;
 
+import java.util.Iterator;
+
 /**
  * 
  * @author Poh Kah Kong
@@ -11,7 +13,7 @@ package com.algomized.datastructures.stacks;
  * </p>
  *
  */
-public class Stack<Item> implements StackAPI<Item> {
+public class Stack<Item> implements StackAPI<Item>, Iterable<Item> {
 	public static void main(String[] args) {
 		Stack<Integer> stack = new Stack<Integer>();
 		stack.push(1);
@@ -100,5 +102,27 @@ public class Stack<Item> implements StackAPI<Item> {
 			current = current.next;
 		}
 		return strBuf.toString();
+	}
+
+	public Iterator<Item> iterator() {
+		return new StackIterator();
+	}
+	
+	class StackIterator implements Iterator<Item> {
+		Node current = first;
+		
+		public boolean hasNext() {
+			return current != null;
+		}
+
+		public Item next() {
+			Item item = current.item;
+			current = current.next;
+			return item;
+		}
+
+		public void remove() {
+		}
+		
 	}
 }

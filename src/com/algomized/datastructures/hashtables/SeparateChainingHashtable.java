@@ -1,5 +1,7 @@
 package com.algomized.datastructures.hashtables;
 
+import com.algomized.datastructures.queues.Queue;
+
 /**
  * 
  * @author Poh Kah Kong
@@ -12,10 +14,10 @@ package com.algomized.datastructures.hashtables;
  * Space: Worst(n)
  * </p>
  */
-public class SeparateChainingHashtable<K, V> implements HashtableAPI<K, V> {
+public class SeparateChainingHashtable<Key, Value> implements HashtableAPI<Key, Value> {
 	private int m;
 	private int n = 0;
-	private SequentialSearchLinkedListHashtable<K, V>[] sequentialSearchST;
+	private SequentialSearchLinkedListHashtable<Key, Value>[] sequentialSearchST;
 	
 	public SeparateChainingHashtable() {
 		this(997);
@@ -24,10 +26,10 @@ public class SeparateChainingHashtable<K, V> implements HashtableAPI<K, V> {
 	@SuppressWarnings("unchecked")
 	public SeparateChainingHashtable(int m) {
 		this.m = m;
-		sequentialSearchST = (SequentialSearchLinkedListHashtable<K, V>[]) 
+		sequentialSearchST = (SequentialSearchLinkedListHashtable<Key, Value>[]) 
 				new SequentialSearchLinkedListHashtable[m];
 		for (int i=0; i<sequentialSearchST.length; i++) {
-			sequentialSearchST[i] = new SequentialSearchLinkedListHashtable<K, V>();
+			sequentialSearchST[i] = new SequentialSearchLinkedListHashtable<Key, Value>();
 		}		
 	}
 	
@@ -36,7 +38,7 @@ public class SeparateChainingHashtable<K, V> implements HashtableAPI<K, V> {
 	 * Time:  Average = O(1), Worst = O(n) (all elements at one linked list)<br>
 	 * Space: 1 int = O(1)
 	 */
-	public void put(K key, V value) {
+	public void put(Key key, Value value) {
 		int hash = hash(key);
 		if (!sequentialSearchST[hash].contains(key)) {
 			n++;			
@@ -49,7 +51,7 @@ public class SeparateChainingHashtable<K, V> implements HashtableAPI<K, V> {
 	 * Time:  Average = O(1), Worst = O(n) (all elements at one linked list)<br>
 	 * Space: O(1)
 	 */
-	public V get(K key) {
+	public Value get(Key key) {
 		return sequentialSearchST[hash(key)].get(key);
 	}
 
@@ -58,16 +60,16 @@ public class SeparateChainingHashtable<K, V> implements HashtableAPI<K, V> {
 	 * Time:  Average = O(1), Worst = O(n) (all elements at one linked list)<br>
 	 * Space: 1 int = O(1)
 	 */	
-	public void remove(K key) {
+	public void delete(Key key) {
 		int hash = hash(key);
 		if (!sequentialSearchST[hash].contains(key)) {
 			return;
 		}		
-		sequentialSearchST[hash].remove(key);
+		sequentialSearchST[hash].delete(key);
 		n--;
 	}
 	
-	public boolean contains(K key) {
+	public boolean contains(Key key) {
 		return sequentialSearchST[hash(key)].contains(key);
 	}
 	
@@ -79,7 +81,17 @@ public class SeparateChainingHashtable<K, V> implements HashtableAPI<K, V> {
 		return n;
 	}
 	
-	private int hash(K key) {
+	private int hash(Key key) {
 		return (key.hashCode() & 0x7fffffff) % m;
 	}	
+	
+	public Iterable<Key> keys() {
+		Queue<Key> queue = new Queue<Key>();
+		for (int i = 0; i < sequentialSearchST.length; i++) {
+			for (Key key : sequentialSearchST[i].keys()) {
+				queue.enqueue(key);
+			}			
+		}
+		return queue;
+	}
 }

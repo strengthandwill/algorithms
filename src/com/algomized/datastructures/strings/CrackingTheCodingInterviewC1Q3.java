@@ -66,7 +66,7 @@ public class CrackingTheCodingInterviewC1Q3 {
 			if (hashtable.contains(c)) { // char found
 				int count = hashtable.get(c);
 				if (count == 1) {
-					hashtable.remove(c);
+					hashtable.delete(c);
 				} else {
 					hashtable.put(c, count - 1);
 				}

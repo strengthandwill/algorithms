@@ -1,5 +1,7 @@
 package com.algomized.datastructures.queues;
 
+import java.util.Iterator;
+
 /**
  * 
  * @author Poh Kah Kong
@@ -11,7 +13,7 @@ package com.algomized.datastructures.queues;
  * </p>
  *
  */
-public class Queue<Item> implements QueueAPI<Item> {
+public class Queue<Item> implements QueueAPI<Item>, Iterable<Item> {
 	public static void main(String[] args) {
 		Queue<Integer> queue = new Queue<Integer>();
 		queue.enqueue(1);
@@ -109,6 +111,27 @@ public class Queue<Item> implements QueueAPI<Item> {
 			current = current.next;
 		}
 		return strBuf.toString();
+	}
+
+	public Iterator<Item> iterator() {
+		return new QueueIterator();
+	}
+	
+	class QueueIterator implements Iterator<Item> {
+		Node current = first;
+
+		public boolean hasNext() {
+			return first != null;
+		}
+
+		public Item next() {
+			Item item = current.item;
+			current = current.next;
+			return item;
+		}
+
+		public void remove() {
+		}		
 	}
 	
 }

@@ -1,22 +1,24 @@
 package com.algomized.datastructures.hashtables;
 
-public class SequentialSearchLinkedListHashtable<K, V> implements HashtableAPI<K, V> {	
+import com.algomized.datastructures.queues.Queue;
+
+public class SequentialSearchLinkedListHashtable<Key, Value> implements HashtableAPI<Key, Value> {	
 	private Node first;	
 	private int n = 0;
 	
 	class Node {
-		K key;
-		V value;
+		Key key;
+		Value value;
 		Node next;
 		
-		public Node(K key, V value, Node next) {
+		public Node(Key key, Value value, Node next) {
 			this.key = key;
 			this.value = value;
 			this.next = next;
 		}
 	}
 	
-	public void put(K key, V value) {
+	public void put(Key key, Value value) {
 		for (Node x = first; x != null; x = x.next) {
 			if (x.key.equals(key)) { // search hit
 				x.value = value;
@@ -29,7 +31,7 @@ public class SequentialSearchLinkedListHashtable<K, V> implements HashtableAPI<K
 		n++;
 	}
 	
-	public V get(K key) {		
+	public Value get(Key key) {		
 		for (Node x = first; x != null; x = x.next) {
 			if (x.key.equals(key)) {
 				return x.value; // search hit
@@ -38,7 +40,7 @@ public class SequentialSearchLinkedListHashtable<K, V> implements HashtableAPI<K
 		return null; // search miss
 	}
 	
-	public boolean contains(K key) {
+	public boolean contains(Key key) {
 		for (Node x= first; x != null; x = x.next) {
 			if (x.key.equals(key)) { // search hit
 				return true;
@@ -47,7 +49,7 @@ public class SequentialSearchLinkedListHashtable<K, V> implements HashtableAPI<K
 		return false;
 	}
 	
-	public void remove(K key) {		
+	public void delete(Key key) {		
 		if (first.key.equals(key)) { // search hit at first node
 			first = first.next;
 			n--;
@@ -70,5 +72,15 @@ public class SequentialSearchLinkedListHashtable<K, V> implements HashtableAPI<K
 	
 	public int size() {
 		return n;
+	}
+	
+	public Iterable<Key> keys() {
+		Queue<Key> queue = new Queue<Key>();
+		Node current = first;
+		while (current != null) {
+			queue.enqueue(current.key);
+			current = current.next;
+		}
+		return queue;
 	}
 }

@@ -1,5 +1,7 @@
 package com.algomized.datastructures.arrays;
 
+import java.util.Iterator;
+
 /**
  * 
  * @author Poh Kah Kong
@@ -13,7 +15,7 @@ package com.algomized.datastructures.arrays;
  * Space: Worst = O(n)
  * </p>
  */
-public class ArrayList<Item> implements ArrayListAPI<Item> {
+public class ArrayList<Item> implements ArrayListAPI<Item>, Iterable<Item> {
 	public static void main(String[] args) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		list.append(1);
@@ -133,5 +135,24 @@ public class ArrayList<Item> implements ArrayListAPI<Item> {
 			buffer[i + 1] = buffer[i];
 		}
 		
+	}
+
+	public Iterator<Item> iterator() {
+		return null;
 	}	
+	
+	class ArrayListIterator implements Iterator<Item> {
+		int current = 0;
+
+		public boolean hasNext() {
+			return current < size;
+		}
+
+		public Item next() {
+			return buffer[current++];
+		}
+
+		public void remove() {
+		}		
+	}
 }

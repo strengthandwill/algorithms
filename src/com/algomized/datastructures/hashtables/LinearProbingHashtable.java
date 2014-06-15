@@ -1,12 +1,14 @@
 package com.algomized.datastructures.hashtables;
 
-public class LinearProbingHashtable<K, V> implements HashtableAPI<K, V> {
+import com.algomized.datastructures.queues.Queue;
+
+public class LinearProbingHashtable<Key, Value> implements HashtableAPI<Key, Value> {
 	private int m;
 	private int n = 0;
 	private int sMax;
 	
-	private K[] keys;
-	private V[] values;
+	private Key[] keys;
+	private Value[] values;
 	
 	public LinearProbingHashtable() {
 		this(997, 5);
@@ -16,11 +18,11 @@ public class LinearProbingHashtable<K, V> implements HashtableAPI<K, V> {
 	public LinearProbingHashtable(int m, int sMax) {
 		this.m = m;
 		this.sMax = sMax;
-		keys = (K[]) new Object[m];
-		values = (V[]) new Object[m];
+		keys = (Key[]) new Object[m];
+		values = (Value[]) new Object[m];
 	}
 	
-	public void put(K key, V value) {
+	public void put(Key key, Value value) {
 		int i = hash(key);
 		int s = 0;
 		while (keys[i] != null && !keys[i].equals(key)) {
@@ -35,7 +37,7 @@ public class LinearProbingHashtable<K, V> implements HashtableAPI<K, V> {
 		}
 	}
 	
-	public V get(K key) {
+	public Value get(Key key) {
 		int i = hash(key);		
 		while (keys[i] != null && !keys[i].equals(key)) {
 			i = (i + 1) % m;			
@@ -43,7 +45,7 @@ public class LinearProbingHashtable<K, V> implements HashtableAPI<K, V> {
 		return (keys[i] != null) ? values[i] : null;
 	}
 	
-	public void remove(K key) {
+	public void delete(Key key) {
 		int i = hash(key);
 		while (keys[i] != null && keys[i].equals(key)) {
 			i = (i + 1) % m;
@@ -70,7 +72,7 @@ public class LinearProbingHashtable<K, V> implements HashtableAPI<K, V> {
 		}
 	}
 	
-	public boolean contains(K key) {
+	public boolean contains(Key key) {
 		int i = hash(key);
 		while (keys[i] != null && keys[i].equals(key)) {
 			i = (i + 1) % m;
@@ -86,12 +88,12 @@ public class LinearProbingHashtable<K, V> implements HashtableAPI<K, V> {
 		return n;
 	}	
 	
-	private int hash(K key) {
+	private int hash(Key key) {
 		return (key.hashCode() & 0x7fffffff) % m;
 	}	
 	
 	private void resize(int cap) {
-		LinearProbingHashtable<K, V> linearProbingHashST = new LinearProbingHashtable<K, V>(cap, sMax);
+		LinearProbingHashtable<Key, Value> linearProbingHashST = new LinearProbingHashtable<Key, Value>(cap, sMax);
 		for (int i = 0; i < keys.length; i++) {
 			if (keys[i] != null) {
 				linearProbingHashST.put(keys[i], values[i]);
@@ -100,5 +102,15 @@ public class LinearProbingHashtable<K, V> implements HashtableAPI<K, V> {
 		keys = linearProbingHashST.keys;
 		values = linearProbingHashST.values;
 		m = linearProbingHashST.m;
+	}
+	
+	public Iterable<Key> keys() {
+		Queue<Key> queue = new Queue<Key>();
+		for (int i = 0; i < keys.length; i++) {
+			if (keys[i] != null) {
+				queue.enqueue(keys[i]);
+			}
+		}
+		return queue;
 	}
 }
