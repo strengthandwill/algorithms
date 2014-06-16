@@ -17,8 +17,8 @@ import com.algomized.datastructures.queues.Queue;
  * </p>
  * 
  */
-public class BinarySearchTree <K extends Comparable<K>, V> 
-	implements BinarySearchTreeAPI<K, V> {
+public class BinarySearchTree <Key extends Comparable<Key>, Value> 
+	implements BinarySearchTreeAPI<Key, Value> {
 	
 	public static void main(String[] args) {
 		BinarySearchTree<Integer, Integer> bst = new BinarySearchTree<Integer, Integer>();
@@ -28,7 +28,6 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 		bst.put(42, 42);
 		bst.put(30, 30);
 		
-
 		bst.put(54, 54);
 		bst.put(35, 35);
 		bst.put(12, 12);
@@ -56,15 +55,15 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 		System.out.println(bst.keys(25, 36));
 	}
 	
-	private Node root;
+	protected Node root;
 	
 	class Node {
-		K key;
-		V value;
+		Key key;
+		Value value;
 		int size;
 		Node left, right;
 
-		public Node(K key, V value, int size) {
+		public Node(Key key, Value value, int size) {
 			this.key = key;
 			this.value = value;
 			this.size = size;
@@ -78,13 +77,13 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	/**
 	 * <b>Insert</b><br>
 	 * Time:  Average = O(log(n)), Worst = O(n)<br>
-	 * Space: Worst = O(log(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */
-	public void put(K key, V value) {
+	public void put(Key key, Value value) {
 		root = put(root, key, value);
 	}
 	
-	private Node put(Node node, K key, V value) {
+	private Node put(Node node, Key key, Value value) {
 		if (node == null) {
 			return new Node(key, value, 1);
 		}
@@ -103,13 +102,13 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	/**
 	 * <b>Search</b><br>
 	 * Time:  Average = O(log(n)), Worst = O(n)<br>
-	 * Space: Worst = O(logn(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */
-	public V get(K key) {
+	public Value get(Key key) {
 		return get(root, key);
 	}
 	
-	private V get(Node node, K key) {
+	private Value get(Node node, Key key) {
 		if (node == null) {
 			return null;
 		}
@@ -123,7 +122,7 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 		}
 	}
 	
-	public boolean contains(K key) {
+	public boolean contains(Key key) {
 		return get(key) != null;
 	}
 	
@@ -131,13 +130,13 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	 * <b>Delete</b><br>
 	 * Time:  Average = O(log(n)) [Traversal] + O(log(n)) [min()] + O(log(n)) [deleteMin()] = O(log(n)),
 	 * Worst = O(n) [Traversal] + O(n) [min()] + O(n) [deleteMin()] = O(n)<br>
-	 * Space: Worst = O(n) <Recursive)
+	 * Space: Worst = O(n)
 	 */
-	public void delete(K key) {
+	public void delete(Key key) {
 		root = delete(root, key);
 	}
 	
-	private Node delete(Node node, K key) {
+	private Node delete(Node node, Key key) {
 		if (node == null) {
 			return null;
 		}
@@ -168,20 +167,20 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	}
 	
 	public boolean isEmpty() {
-		return size(root) == 0;
+		return root == null;
 	}
 	
-	public Iterable<K> keys() {
+	public Iterable<Key> keys() {
 		return keys(min(), max());
 	}
 	
-	public Iterable<K> keys(K lo, K hi) {
-		Queue<K> queue = new Queue<K>();
+	public Iterable<Key> keys(Key lo, Key hi) {
+		Queue<Key> queue = new Queue<Key>();
 		keys(root, lo, hi, queue);
 		return queue;
 	}
 	
-	public void keys(Node node, K lo, K hi, Queue<K> queue) {
+	public void keys(Node node, Key lo, Key hi, Queue<Key> queue) {
 		if (node == null) {
 			return;
 		}
@@ -194,9 +193,9 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	
 	/**
 	 * Time:  Average = O(log(n)), Worst = O(n)<br>
-	 * Space: Worst = O(log(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */
-	public K min() {
+	public Key min() {
 		return min(root).key;
 	}
 	
@@ -209,9 +208,9 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 
 	/**
 	 * Time:  Average = O(log(n)), Worst = O(n)<br>
-	 * Space: Worst = O(log(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */	
-	public K max() {
+	public Key max() {
 		return max(root).key;
 	}
 	
@@ -224,13 +223,13 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	
 	/**
 	 * Time:  Average = O(log(n)), Worst = O(n)<br>
-	 * Space: Worst = O(log(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */	
-	public K floor(K key) {
+	public Key floor(Key key) {
 		return floor(root, key).key;
 	}
 	
-	private Node floor(Node node, K key) {
+	private Node floor(Node node, Key key) {
 		if (node == null) {
 			return null;
 		}		
@@ -247,13 +246,13 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	
 	/**
 	 * Time:  Average = O(log(n)), Worst = O(n)<br>
-	 * Space: Worst = O(log(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */	
-	public K ceiling(K key) {
+	public Key ceiling(Key key) {
 		return ceiling(root, key).key;
 	}
 	
-	private Node ceiling(Node node, K key) {
+	private Node ceiling(Node node, Key key) {
 		if (node == null) {
 			return null;
 		}		
@@ -270,9 +269,9 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	
 	/**
 	 * Time:  Average = O(log(n)), Worst = O(n)<br>
-	 * Space: Worst = O(log(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */	
-	public K select(int rank) {
+	public Key select(int rank) {
 		if (rank < 0 || rank >= size()) {
 			return null;
 		}
@@ -295,13 +294,13 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	
 	/**
 	 * Time:  Average = O(log(n)), Worst = O(n)<br>
-	 * Space: Worst = O(log(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */	
-	public int rank(K key) {
+	public int rank(Key key) {
 		return rank(root, key);
 	}
 	
-	private int rank(Node node, K key) {
+	private int rank(Node node, Key key) {
 		if (node == null) {
 			return -1;
 		}
@@ -317,7 +316,7 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	
 	/**
 	 * Time:  Average = Worst = O(log(n))<br>
-	 * Space: Worst = O(log(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */
 	public void deleteMin() {
 		root = deleteMin(root);
@@ -334,7 +333,7 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	
 	/**
 	 * Time:  Average = Worst = O(log(n))<br>
-	 * Space: Worst = O(log(n)) [Recursive]
+	 * Space: Worst = O(n)
 	 */
 	public void deleteMax() {
 		root = deleteMax(root);
@@ -357,8 +356,8 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	
 	/**
 	 * <b>Pre-order traversal</b><br>
-	 * Time:  Average = Worst= O(n)<br>
-	 * Space: Worst = O(n) [Recursive]
+	 * Time:  Average = O(log(n)), Worst= O(n)<br>
+	 * Space: Worst = O(n)
 	 */
 	public String preOrderTraversal() {
 		StringBuffer strBuf = new StringBuffer();
@@ -377,8 +376,8 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 
 	/**
 	 * <b>In-order traversal</b><br>
-	 * Time:  Average = Worst= O(n)<br>
-	 * Space: Worst = O(n) [Recursive]
+	 * Time:  Average = O(log(n)), Worst= O(n)<br>
+	 * Space: Worst = O(n)
 	 */	
 	public String inOrderTraversal() {
 		StringBuffer strBuf = new StringBuffer();
@@ -397,8 +396,8 @@ public class BinarySearchTree <K extends Comparable<K>, V>
 	
 	/**
 	 * <b>Post-order traversal</b><br>
-	 * Time:  Average = Worst= O(n)<br>
-	 * Space: Worst = O(n) [Recursive]
+	 * Time:  Average = O(log(n)), Worst= O(n)<br>
+	 * Space: Worst = O(n)
 	 */		
 	public String postOrderTraversal() {
 		StringBuffer strBuf = new StringBuffer();
