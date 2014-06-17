@@ -49,7 +49,7 @@ public class CrackingTheCodingInterviewC3Q3 {
 		
 		public SetOfStacks() { 
 			list = new ArrayList<StackWithCapacity<Integer>>();
-			list.append(new StackWithCapacity<Integer>());			
+			list.add(new StackWithCapacity<Integer>());			
 		}
 		
 		/**
@@ -58,7 +58,7 @@ public class CrackingTheCodingInterviewC3Q3 {
 		 */
 		public void push(int item) {
 			if (list.get(index).isFull()) {
-				list.append(new StackWithCapacity<Integer>());
+				list.add(new StackWithCapacity<Integer>());
 				index++;
 			}
 			list.get(index).push(item);

@@ -24,15 +24,15 @@ public class CrackingTheCodingInterviewC2Q5 {
 
 	public static void main(String[] args) {
 		
-		Node<Integer> op1 = new Node<Integer>(7);
+		ListNode<Integer> op1 = new ListNode<Integer>(7);
 		op1.append(1);
 		op1.append(6);
 				
-		Node<Integer> op2 = new Node<Integer>(5);
+		ListNode<Integer> op2 = new ListNode<Integer>(5);
 		op2.append(9);
 		op2.append(2);
 		//Node<Integer> resultf = sumForward(op1f, op2f);		
-		Node<Integer> result = sumIterative(op1, op2);
+		ListNode<Integer> result = sumIterative(op1, op2);
 		System.out.println(result);
 		
 		
@@ -48,16 +48,16 @@ public class CrackingTheCodingInterviewC2Q5 {
 */	
 	}
 	
-	public static Node<Integer> sumIterative(Node<Integer> op1, Node<Integer> op2) {
+	public static ListNode<Integer> sumIterative(ListNode<Integer> op1, ListNode<Integer> op2) {
 		if (op1 == null && op2 == null) return null;
-		Node<Integer> result = null;
+		ListNode<Integer> result = null;
 		int carry = 0;
 		while (op1 != null || op2 != null || carry != 0) {
 			if (op1 == null) {
-				op1 = new Node<Integer>(0);
+				op1 = new ListNode<Integer>(0);
 			}			
 			if (op2 == null) {
-				op2 = new Node<Integer>(0);
+				op2 = new ListNode<Integer>(0);
 			}
 			
 			int resultInt = op1.item + op2.item + carry;
@@ -65,7 +65,7 @@ public class CrackingTheCodingInterviewC2Q5 {
 			carry = resultInt / 10;
 			
 			if (result == null) {
-				result = new Node<Integer>(valueInt);
+				result = new ListNode<Integer>(valueInt);
 			} else {
 				result.append(valueInt);
 			}			
@@ -79,17 +79,17 @@ public class CrackingTheCodingInterviewC2Q5 {
 	 * Time:  O(n), where n is the greatest length among op1, op2 and result<br>
 	 * Space: n * (1 int, 2 nodes) = O(n), where n is the greater length of op1, op2 or result
 	 */
-	public static Node<Integer> sumRecursive(Node<Integer> op1, Node<Integer> op2) {
+	public static ListNode<Integer> sumRecursive(ListNode<Integer> op1, ListNode<Integer> op2) {
 		return sumRecursive(op1, op2, 0);
 	}
 	
-	private static Node<Integer> sumRecursive(Node<Integer> op1, Node<Integer> op2, int carry) {
+	private static ListNode<Integer> sumRecursive(ListNode<Integer> op1, ListNode<Integer> op2, int carry) {
 		if (op1 == null && op2 == null && carry == 0) return null;		
-		if (op1 == null) op1 = new Node<Integer>(0); // pad with zero
-		if (op2 == null) op2 = new Node<Integer>(0); // pad with zero
+		if (op1 == null) op1 = new ListNode<Integer>(0); // pad with zero
+		if (op2 == null) op2 = new ListNode<Integer>(0); // pad with zero
 		int resultInt = op1.item + op2.item + carry; // summing up
-		Node<Integer> result = sumRecursive(op1.next, op2.next, resultInt / 10);
-		Node<Integer> sum = new Node<Integer>(resultInt % 10);
+		ListNode<Integer> result = sumRecursive(op1.next, op2.next, resultInt / 10);
+		ListNode<Integer> sum = new ListNode<Integer>(resultInt % 10);
 		if (result == null) result = sum;
 		else {
 			sum.next = result;
@@ -98,7 +98,7 @@ public class CrackingTheCodingInterviewC2Q5 {
 		return result;
 	}
 	
-	private static int length(Node<Integer> node) {
+	private static int length(ListNode<Integer> node) {
 		if (node == null) return 0;
 		int i = 0;
 		while (node != null) {
@@ -113,7 +113,7 @@ public class CrackingTheCodingInterviewC2Q5 {
 	 * r is abs(p - q) and n is the greater length between op1 and op2<br>
 	 * Space: 2 int + 1 IntWrapper + O(n) = O(n), where n is the greater length between op1 and op2.
 	 */
-	public static Node<Integer> sumForwardRecursive(Node<Integer> op1, Node<Integer> op2) {
+	public static ListNode<Integer> sumForwardRecursive(ListNode<Integer> op1, ListNode<Integer> op2) {
 		// find length of op1 and op2
 		int op1Length = length(op1);
 		int op2Length = length(op2);
@@ -124,24 +124,24 @@ public class CrackingTheCodingInterviewC2Q5 {
 		
 		// summing up
 		IntWrapper carry = new IntWrapper();
-		Node<Integer> result = sumForwardRecursive(op1, op2, carry);
+		ListNode<Integer> result = sumForwardRecursive(op1, op2, carry);
 		if (carry.value > 0) result = insert(result, carry.value);
 		return result;
 	}
 	
-	private static Node<Integer> sumForwardRecursive(Node<Integer> op1, Node<Integer> op2, IntWrapper carry) {
+	private static ListNode<Integer> sumForwardRecursive(ListNode<Integer> op1, ListNode<Integer> op2, IntWrapper carry) {
 		if (op1 == null && op2 == null) return null;
-		Node<Integer> result = sumForwardRecursive(op1.next, op2.next, carry);
+		ListNode<Integer> result = sumForwardRecursive(op1.next, op2.next, carry);
 		int resultInt = op1.item + op2.item + carry.value; // summing up
 		carry.value = resultInt / 10; // update carry
 		
 		// update result
-		if (result == null)  result = new Node<Integer>(resultInt % 10);
+		if (result == null)  result = new ListNode<Integer>(resultInt % 10);
 		else result = insert(result, resultInt % 10);
 		return result;
 	}		
 	
-	private static Node<Integer> padZeros(Node<Integer> node, int n) {
+	private static ListNode<Integer> padZeros(ListNode<Integer> node, int n) {
 		if (node == null || n < 0) return null;
 		for (int i = 0; i < n; i++) {
 			node = insert(node, 0);
@@ -149,8 +149,8 @@ public class CrackingTheCodingInterviewC2Q5 {
 		return node;
 	}
 	
-	private static Node<Integer> insert(Node<Integer> node, int i) {
-		Node<Integer> insert = new Node<Integer>(i);
+	private static ListNode<Integer> insert(ListNode<Integer> node, int i) {
+		ListNode<Integer> insert = new ListNode<Integer>(i);
 		insert.next = node;
 		return insert;
 	}
@@ -163,7 +163,7 @@ public class CrackingTheCodingInterviewC2Q5 {
 	 * Time:  O(n + m^2), where n is the greater length between op1 and op2 and m is the length of result<br>
 	 * Space: 2 int, 1 node
 	 */
-	public static Node<Integer> sum(Node<Integer> op1, Node<Integer> op2) {
+	public static ListNode<Integer> sum(ListNode<Integer> op1, ListNode<Integer> op2) {
 		if (op1 == null || op2 == null) return null;
 		int op1Int = 0, op2Int = 0;
 		int i = 1;
@@ -179,9 +179,9 @@ public class CrackingTheCodingInterviewC2Q5 {
 			i *= 10;
 		}
 		int resultInt = op1Int + op2Int; // summing up
-		Node<Integer> result = null;
+		ListNode<Integer> result = null;
 		while (resultInt > 0) { // result int to linked list
-			if (result == null) result = new Node<Integer>(resultInt % 10);
+			if (result == null) result = new ListNode<Integer>(resultInt % 10);
 			else result.append(resultInt % 10);
 			resultInt /= 10;
 		}
@@ -192,7 +192,7 @@ public class CrackingTheCodingInterviewC2Q5 {
 	 * Time:  O(n + m), where n is the greater length between op1 or op2 and m is the length of result<br>
 	 * Space: 2 int, 1 node = O(1) 
 	 */
-	public static Node<Integer> sumForward(Node<Integer> op1, Node<Integer> op2) {
+	public static ListNode<Integer> sumForward(ListNode<Integer> op1, ListNode<Integer> op2) {
 		if (op1 == null || op2 == null) return null;
 		int op1Int = 0, op2Int = 0;
 		while (op1 != null && op2 != null) { // operand linked lists to int
@@ -206,9 +206,9 @@ public class CrackingTheCodingInterviewC2Q5 {
 			}
 		}
 		int resultInt = op1Int + op2Int; // summing up
-		Node<Integer> result = null;
+		ListNode<Integer> result = null;
 		while (resultInt > 0) { // int to linkedlist
-			if (result == null) result = new Node<Integer>(resultInt % 10);
+			if (result == null) result = new ListNode<Integer>(resultInt % 10);
 			else insert(result, resultInt % 10);
 			resultInt /= 10;
 		}

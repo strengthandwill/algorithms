@@ -2,6 +2,8 @@ package com.algomized.datastructures.arrays;
 
 import java.util.Iterator;
 
+import com.algomized.datastructures.ListAPI;
+
 /**
  * 
  * @author Poh Kah Kong
@@ -15,13 +17,13 @@ import java.util.Iterator;
  * Space: Worst = O(n)
  * </p>
  */
-public class ArrayList<Item> implements ArrayListAPI<Item>, Iterable<Item> {
+public class ArrayList<Item> implements ListAPI<Item>, Iterable<Item> {
 	public static void main(String[] args) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		list.append(1);
-		list.append(2);
-		list.append(3);
-		list.append(4);
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
 		list.insert(5);
 		System.out.println(list);
 		System.out.println(list.get(2));
@@ -61,7 +63,7 @@ public class ArrayList<Item> implements ArrayListAPI<Item>, Iterable<Item> {
 	 * Time:  Average = O(1), Worst = O(n) (resizing)<br>
 	 * Space: Worst = O(n) (resizing)
 	 */
-	public void append(Item item) {
+	public void add(Item item) {
 		if (size > buffer.length / 2) {
 			resize(buffer.length * 2);
 		}
@@ -74,16 +76,14 @@ public class ArrayList<Item> implements ArrayListAPI<Item>, Iterable<Item> {
 	 * Time:  Average = Worst = O(n) (Shifting)<br>
 	 * Space: Worst = O(n)
 	 */
-	public Item delete(int index) {
+	public void delete(int index) {
 		if (size == 0 || index < 0 || index >= size) {
-			return null;
+			return;
 		}
-		Item item = buffer[index];
 		shiftLeft(index);
 		if (size < buffer.length / 4) {
 			resize(buffer.length / 2);
 		}		
-		return item;
 	}
 	
 	/**
@@ -138,7 +138,7 @@ public class ArrayList<Item> implements ArrayListAPI<Item>, Iterable<Item> {
 	}
 
 	public Iterator<Item> iterator() {
-		return null;
+		return new ArrayListIterator();
 	}	
 	
 	class ArrayListIterator implements Iterator<Item> {

@@ -18,9 +18,9 @@ package com.algomized.datastructures.linkedlists;
  */
 public class CrackingTheCodingInterviewC2Q6 {
 	public static void main(String[] args) {
-		Node<Character> node = new Node<Character>('a');
+		ListNode<Character> node = new ListNode<Character>('a');
 		node.append('b');
-		Node<Character> loopBeginningNode = node.append('c');
+		ListNode<Character> loopBeginningNode = node.append('c');
 		node.append('d');
 		node.append('e').next = loopBeginningNode;
 		System.out.println(getLoopBeginningNode(node).item);
@@ -30,11 +30,11 @@ public class CrackingTheCodingInterviewC2Q6 {
 	 * Time:  O(n)<br>
 	 * Space: 2 nodes = O(1) 
 	 */
-	public static Node<Character> getLoopBeginningNode(Node<Character> node) {
+	public static ListNode<Character> getLoopBeginningNode(ListNode<Character> node) {
 		if (node == null || node.next == node) return null;
-		Node<Character> second = isCyclic(node); // get collision node
+		ListNode<Character> second = isCyclic(node); // get collision node
 		if (second == null) return null;
-		Node<Character> first = node;
+		ListNode<Character> first = node;
 		while (first != second) {
 			first = first.next;
 			second = second.next;
@@ -46,10 +46,10 @@ public class CrackingTheCodingInterviewC2Q6 {
 	 * Time:  O(n)<br>
 	 * Space: 2 nodes = O(1)
 	 */
-	private static Node<Character> isCyclic(Node<Character> node) {
+	private static ListNode<Character> isCyclic(ListNode<Character> node) {
 		if (node == null || node.next == null) return null;
-		Node<Character> first = node;
-		Node<Character> second = node;
+		ListNode<Character> first = node;
+		ListNode<Character> second = node;
 		while (second != null && second.next != null) {
 			first = first.next;
 			second = second.next.next;

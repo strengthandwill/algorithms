@@ -1,11 +1,11 @@
-package com.algomized.datastructures.hashtables;
+package com.algomized.datastructures;
 
-public interface HashtableAPI <Key, Value> {
+public interface SymbolTableAPI<Key, Value> {
 	public void put(Key key, Value value);
-	public boolean contains(Key key);
 	public Value get(Key key);
 	public void delete(Key key);
+	public boolean contains(Key key);
+	public int size();
 	public boolean isEmpty();
-	public int size();	
 	public Iterable<Key> keys();
 }

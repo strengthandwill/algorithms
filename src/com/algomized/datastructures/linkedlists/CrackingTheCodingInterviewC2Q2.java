@@ -11,7 +11,7 @@ package com.algomized.datastructures.linkedlists;
  */
 public class CrackingTheCodingInterviewC2Q2 {
 	public static void main(String[] args) {
-		Node<Integer> node = new Node<Integer>(1);
+		ListNode<Integer> node = new ListNode<Integer>(1);
 		node.append(2);
 		node.append(3);
 		node.append(4);
@@ -27,10 +27,10 @@ public class CrackingTheCodingInterviewC2Q2 {
 	 * Time:  O(n)<br>
 	 * Space: 2 nodes = O(1)
 	 */
-	public static Node<Integer> findKLastNodeUsingRunnerTechnique(Node<Integer> node, int k) {
+	public static ListNode<Integer> findKLastNodeUsingRunnerTechnique(ListNode<Integer> node, int k) {
 		if (k <= 0 || node == null) return null;
-		Node<Integer> first = node;
-		Node<Integer> second = node;
+		ListNode<Integer> first = node;
+		ListNode<Integer> second = node;
 		for (int i = 0; i < k; i++) { // move first forward to kth node
 			if (first == null) return null;
 			first = first.next;
@@ -46,9 +46,9 @@ public class CrackingTheCodingInterviewC2Q2 {
 	 * Time:  2n = O(n)<br>
 	 * Space: 1 node, 2 int = O(1)
 	 */
-	public static Node<Integer> findKLastNodeUsingSingleReference(Node<Integer> node, int k) {
+	public static ListNode<Integer> findKLastNodeUsingSingleReference(ListNode<Integer> node, int k) {
 		if (k <= 0 || node == null) return null;
-		Node<Integer> current = node;
+		ListNode<Integer> current = node;
 		int n = 0;
 		while (current != null) { // find length of linked list
 			current = current.next;
@@ -70,13 +70,13 @@ public class CrackingTheCodingInterviewC2Q2 {
 	 * Time:  O(n)<br>
 	 * Space: O(n)
 	 */
-	public static Node<Integer> findKLastNodeRecursiveUsingNodeWrapper(Node<Integer> node, int k) {
+	public static ListNode<Integer> findKLastNodeRecursiveUsingNodeWrapper(ListNode<Integer> node, int k) {
 		NodeWrapper<Integer> nw = new NodeWrapper<Integer>();
 		findKLastNodeRecursiveUsingNodeWrapper(node, k, nw);
 		return nw.node;
 	}
 	
-	private static int findKLastNodeRecursiveUsingNodeWrapper(Node<Integer> node, int k, NodeWrapper<Integer> nw) {
+	private static int findKLastNodeRecursiveUsingNodeWrapper(ListNode<Integer> node, int k, NodeWrapper<Integer> nw) {
 		if (node == null) return 0;
 		int j = findKLastNodeRecursiveUsingNodeWrapper(node.next, k, nw) + 1;
 		if (j == k) nw.node = node; // found
@@ -84,21 +84,21 @@ public class CrackingTheCodingInterviewC2Q2 {
 	}
 	
 	static class NodeWrapper<Item> {
-		Node<Item> node = null;
+		ListNode<Item> node = null;
 	}
 	
 	/**
 	 * Time:  O(n)<br>
 	 * Space: O(n) 
 	 */
-	public static Node<Integer> findKLastNodeRecursiveUsingIntWrapper(Node<Integer> node, int k) {
+	public static ListNode<Integer> findKLastNodeRecursiveUsingIntWrapper(ListNode<Integer> node, int k) {
 		IntWrapper i = new IntWrapper();
 		return findKLastNodeRecursiveUsingIntWrapper(node, k, i);
 	}
 	
-	private static Node<Integer> findKLastNodeRecursiveUsingIntWrapper(Node<Integer> node, int k, IntWrapper i) {
+	private static ListNode<Integer> findKLastNodeRecursiveUsingIntWrapper(ListNode<Integer> node, int k, IntWrapper i) {
 		if (node == null) return null;
-		Node<Integer> result = findKLastNodeRecursiveUsingIntWrapper(node.next, k, i);
+		ListNode<Integer> result = findKLastNodeRecursiveUsingIntWrapper(node.next, k, i);
 		i.value = i.value + 1;
 		if (i.value == k) result = node;
 		return result;		
@@ -112,7 +112,7 @@ public class CrackingTheCodingInterviewC2Q2 {
 	 * Time: O(n)<br>
 	 * Space: 1 int = O(1)
 	 */
-	public static Node<Integer> findKNode( Node<Integer> node, int k) {
+	public static ListNode<Integer> findKNode( ListNode<Integer> node, int k) {
 		if (k <= 0 || node == null) return null;
 		int i = 1;
 		while (node != null) {

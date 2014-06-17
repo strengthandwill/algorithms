@@ -15,9 +15,9 @@ package com.algomized.datastructures.linkedlists;
 public class CrackingTheCodingInterviewC2Q3 {
 
 	public static void main(String[] args) {
-		Node<Character> node = new Node<Character>('a');
+		ListNode<Character> node = new ListNode<Character>('a');
 		node.append('b');
-		Node<Character> delete = node.append('c');
+		ListNode<Character> delete = node.append('c');
 		node.append('d');
 		node.append('e');
 		System.out.println(node);
@@ -29,7 +29,7 @@ public class CrackingTheCodingInterviewC2Q3 {
 	 * Time:  O(1)<br>
 	 * Space: O(1)
 	 */
-	public static void delete(Node<Character> node) {
+	public static void delete(ListNode<Character> node) {
 		if (node == null || node.next == null) return;
 		node.item = node.next.item; // copy item
 		node.next = node.next.next; // remove node node.next

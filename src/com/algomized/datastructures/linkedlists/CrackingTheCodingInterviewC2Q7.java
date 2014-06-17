@@ -13,7 +13,7 @@ import com.algomized.datastructures.stacks.Stack;
  */
 public class CrackingTheCodingInterviewC2Q7 {
 	public static void main(String[] args) {
-		Node<Character> node = new Node<Character>('a');
+		ListNode<Character> node = new ListNode<Character>('a');
 		node.append('i');
 		node.append('b');
 		node.append('o');
@@ -33,11 +33,11 @@ public class CrackingTheCodingInterviewC2Q7 {
 	 * Time:  O(n/2) + O(n/2) = O(n)<br>
 	 * Space: 1 stack (O(n)) + 2 nodes = O(n) 
 	 */
-	public static boolean isPalindromeUsingRunnerTechnique(Node<Character> node) {
+	public static boolean isPalindromeUsingRunnerTechnique(ListNode<Character> node) {
 		if (node == null) return false;
 		Stack<Character> stack = new Stack<Character>();
-		Node<Character> first = node;
-		Node<Character> second = node;
+		ListNode<Character> first = node;
+		ListNode<Character> second = node;
 		while (second != null && second.next != null) { // first will reach the middle when second reach the end
 			stack.push(first.item);
 			first = first.next;
@@ -55,10 +55,10 @@ public class CrackingTheCodingInterviewC2Q7 {
 	 * Time:  O(n) + O(n/2) = O(n)<br>
 	 * Space: 1 stack (O(n)) + 2 nodes + 1 int = O(n) 
 	 */
-	public static boolean isPalindrome(Node<Character> node) {
+	public static boolean isPalindrome(ListNode<Character> node) {
 		if (node == null) return false;
 		Stack<Character> stack = new Stack<Character>(); // use stack to reverse the linked list
-		Node<Character> current = node;
+		ListNode<Character> current = node;
 		int counter = 0;
 		while (current != null) {
 			stack.push(current.item);
@@ -78,11 +78,11 @@ public class CrackingTheCodingInterviewC2Q7 {
 	 * Time:  O(n)<br>
 	 * Space: n * (1 node, 1 node wrapper ) = O(n)
 	 */
-	public static boolean isPalindromeRecursive(Node<Character> node) {
+	public static boolean isPalindromeRecursive(ListNode<Character> node) {
 		return isPalindromeRecursive(node, new NodeWrapper<Character>(node), new IntWrapper());
 	}
 	
-	private static boolean isPalindromeRecursive(Node<Character> node, 
+	private static boolean isPalindromeRecursive(ListNode<Character> node, 
 			NodeWrapper<Character> nw, IntWrapper counter) {
 		if (node == null) {
 			counter.value /= 2; // only need to check half of the elements
@@ -101,8 +101,8 @@ public class CrackingTheCodingInterviewC2Q7 {
 	}
 	
 	static class NodeWrapper<Item> {
-		Node<Item> node;
-		public NodeWrapper(Node<Item> node) {
+		ListNode<Item> node;
+		public NodeWrapper(ListNode<Item> node) {
 			this.node = node;
 		}
 	}

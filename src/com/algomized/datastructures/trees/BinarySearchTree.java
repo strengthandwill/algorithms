@@ -1,5 +1,6 @@
 package com.algomized.datastructures.trees;
 
+import com.algomized.datastructures.SymbolTableAPI;
 import com.algomized.datastructures.queues.Queue;
 
 /**
@@ -10,15 +11,15 @@ import com.algomized.datastructures.queues.Queue;
  * Has low space complexity as linked list. Has lower time complexity than linked list 
  * with parent node having two chid nodes, allowing binary tree traversal.<br>
  * <br>
- * Left nodes has smaller value than the parent node, and right nodes have greater value 
- * than the parent node.<br>  
+ * Left nodes has smaller or equal value than the parent node, and right nodes have 
+ * greater value than the parent node.<br>  
  * <br>
  * Space: O(n)
  * </p>
  * 
  */
 public class BinarySearchTree <Key extends Comparable<Key>, Value> 
-	implements BinarySearchTreeAPI<Key, Value> {
+	implements SymbolTableAPI<Key, Value> {
 	
 	public static void main(String[] args) {
 		BinarySearchTree<Integer, Integer> bst = new BinarySearchTree<Integer, Integer>();

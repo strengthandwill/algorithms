@@ -16,7 +16,7 @@ import com.algomized.datastructures.hashtables.SeparateChainingHashtable;
 public class CrackingTheCodingInterviewC2Q1 {
 
 	public static void main(String[] args) {
-		Node<Character> node = new Node<Character>('h');
+		ListNode<Character> node = new ListNode<Character>('h');
 		node.append('e');		
 		node.append('l');
 		node.append('l');
@@ -38,10 +38,10 @@ public class CrackingTheCodingInterviewC2Q1 {
 	 * Time:  O(n^2)<br>
 	 * Space: O(1)
 	 */
-	public static void removeDuplicates(Node<Character> node) {
+	public static void removeDuplicates(ListNode<Character> node) {
 		if (node == null || node.next == null) return;
 		while (node != null) {
-			Node<Character> second = node;
+			ListNode<Character> second = node;
 			while (second != null && second.next != null) {
 				if (node.item.equals(second.next.item)) second.next = second.next.next; // duplicate found
 				else second = second.next;				
@@ -54,7 +54,7 @@ public class CrackingTheCodingInterviewC2Q1 {
 	 * Time:  O(n)<br>
 	 * Space: 256 booleans
 	 */
-	public static void removeDuplicatesUsingArray(Node<Character> node) {
+	public static void removeDuplicatesUsingArray(ListNode<Character> node) {
 		if (node == null || node.next == null) return;
 		boolean[] found = new boolean[256];				
 		found[node.item] = true;
@@ -73,7 +73,7 @@ public class CrackingTheCodingInterviewC2Q1 {
 	 * Time:  O(n)<br>
 	 * Space: 1 integer for 32 values
 	 */
-	public static void removeDuplicatesUsingBitVector(Node<Character> node) {
+	public static void removeDuplicatesUsingBitVector(ListNode<Character> node) {
 		if (node == null || node.next ==null) return;
 		int checker = 0;
 		checker |= (1 << (node.item - 'a'));
@@ -92,7 +92,7 @@ public class CrackingTheCodingInterviewC2Q1 {
 	 * Time:  O(n)<br>
 	 * Space: O(m), where m is the unique char
 	 */
-	public static void removeDuplicatesUsingHashtable(Node<Character> node) {
+	public static void removeDuplicatesUsingHashtable(ListNode<Character> node) {
 		if (node == null || node.next == null) return;
 		SeparateChainingHashtable<Integer, Character> hashtable = new SeparateChainingHashtable<Integer, Character>();
 		hashtable.put((int) node.item, node.item);

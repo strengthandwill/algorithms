@@ -1,5 +1,6 @@
 package com.algomized.datastructures.trees;
 
+import com.algomized.datastructures.SymbolTableAPI;
 import com.algomized.datastructures.queues.Queue;
 
 /**
@@ -10,12 +11,12 @@ import com.algomized.datastructures.queues.Queue;
  * Red Black BST is both BST and 2-3 tree, having fast searching 
  * from BST and fast balancing from 2-3 tree.<br>
  * <br>
- * Left node with red link is smaller than the root node, and 
+ * Left node with red link is smaller or equal than the root node, and 
  * right node with black link is greater than the root node.
  * </p>
  * 
  */
-public class RedBlackBST <Key extends Comparable<Key>, Value> implements BinarySearchTreeAPI<Key, Value> {
+public class RedBlackBST <Key extends Comparable<Key>, Value> implements SymbolTableAPI<Key, Value> {
 	private static final boolean RED = true;
 	private static final boolean BLACK = false;
 	

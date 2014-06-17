@@ -1,8 +1,9 @@
 package com.algomized.datastructures.hashtables;
 
+import com.algomized.datastructures.SymbolTableAPI;
 import com.algomized.datastructures.queues.Queue;
 
-public class SequentialSearchLinkedListHashtable<Key, Value> implements HashtableAPI<Key, Value> {	
+public class SequentialSearchLinkedListHashtable<Key, Value> implements SymbolTableAPI<Key, Value> {	
 	private Node first;	
 	private int n = 0;
 	

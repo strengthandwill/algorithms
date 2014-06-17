@@ -13,7 +13,7 @@ package com.algomized.datastructures.linkedlists;
 public class CrackingTheCodingInterviewC2Q4 {
 
 	public static void main(String[] args) {
-		Node<Integer> node = new Node<Integer>(0);
+		ListNode<Integer> node = new ListNode<Integer>(0);
 		node.append(1);
 		node.append(8);
 		node.append(3);
@@ -25,7 +25,7 @@ public class CrackingTheCodingInterviewC2Q4 {
 		node.append(2);
 		System.out.println(node);
 		//Node<Integer> partitioned = partition(node, 5);
-		Node<Integer> partitioned = partitionUsingMergeLists(node, 20);
+		ListNode<Integer> partitioned = partitionUsingMergeLists(node, 20);
 		System.out.println(partitioned);
 	}
 	
@@ -33,13 +33,13 @@ public class CrackingTheCodingInterviewC2Q4 {
 	 * Time:  O(n)<br>
 	 * Space: 3 nodes = O(1)
 	 */
-	public static Node<Integer> partition(Node<Integer> node, int x) {
+	public static ListNode<Integer> partition(ListNode<Integer> node, int x) {
 		if (node == null) return null;
 		if (node.next == null) return node;
-		Node<Integer> head = node, tail = node;
+		ListNode<Integer> head = node, tail = node;
 		node = node.next;
 		while (node != null) {
-			Node<Integer> next = node.next; 
+			ListNode<Integer> next = node.next; 
 			if (node.item < x) { // insert at the beginning
 				node.next = head;
 				head = node;
@@ -56,13 +56,13 @@ public class CrackingTheCodingInterviewC2Q4 {
 	 * Time:  O(n)
 	 * Space: 3 nodes = O(1) 
 	 */
-	public static Node<Integer> partitionUsingMergeLists(Node<Integer> node, int x) {
+	public static ListNode<Integer> partitionUsingMergeLists(ListNode<Integer> node, int x) {
 		if (node == null) return null;
 		if (node.next == null) return node;
-		Node<Integer> before = null, beforeTail = null;
-		Node<Integer> after = null;
+		ListNode<Integer> before = null, beforeTail = null;
+		ListNode<Integer> after = null;
 		while (node != null) { // partition
-			Node<Integer> next = node.next;
+			ListNode<Integer> next = node.next;
 			if (node.item < x) { // insert to before list				
 				if (before == null) beforeTail = node;
 				node.next = before;

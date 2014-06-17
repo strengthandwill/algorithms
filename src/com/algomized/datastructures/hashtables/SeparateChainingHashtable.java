@@ -1,5 +1,6 @@
 package com.algomized.datastructures.hashtables;
 
+import com.algomized.datastructures.SymbolTableAPI;
 import com.algomized.datastructures.queues.Queue;
 
 /**
@@ -14,7 +15,7 @@ import com.algomized.datastructures.queues.Queue;
  * Space: Worst(n)
  * </p>
  */
-public class SeparateChainingHashtable<Key, Value> implements HashtableAPI<Key, Value> {
+public class SeparateChainingHashtable<Key, Value> implements SymbolTableAPI<Key, Value> {
 	private int m;
 	private int n = 0;
 	private SequentialSearchLinkedListHashtable<Key, Value>[] sequentialSearchST;
