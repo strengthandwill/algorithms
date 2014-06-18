@@ -1,13 +1,13 @@
-## Binary Search Tree + Red Black Tree
+## Binary Search Tree + Red Black BST
 
 ### APIs
-- public void put(Key key, Value value);
-- public Value get(Key key);
-- public void delete(Key key);
-- public boolean contains(Key key);
-- public int size();
-- public boolean isEmpty();
-- public Iterable<Key> keys();
+- public void put(Key key, Value value)
+- public Value get(Key key)
+- public void delete(Key key)
+- public boolean contains(Key key)
+- public int size()
+- public boolean isEmpty()
+- public Iterable<Key> keys()
 
 ### Binary Search Tree
 
@@ -19,7 +19,7 @@
 #### Space Complexity
 - Worst = O(n)
 
-### Red Black Tree
+### Red Black BST
 
 #### Time Complexity
 - Insert: Average = Worst = O(log(n))

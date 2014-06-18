@@ -1,11 +1,11 @@
-##Queue
+## Queue
 
 ### APIs
-- public void enqueue(Item item);
-- public Item dequeue();
-- public Item peek();
-- public boolean isEmpty();
-- public int size();
+- public void enqueue(Item item)
+- public Item dequeue()
+- public Item peek()
+- public boolean isEmpty()
+- public int size()
 
 ### Time Complexity
 - Insert: Average = Worst = O(1)

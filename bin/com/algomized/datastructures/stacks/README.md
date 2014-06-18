@@ -1,11 +1,11 @@
-##Stack
+## Stack
 
 ### APIs
-- public void push(Item item);
-- public Item pop();
-- public Item peek();
-- public boolean isEmpty();
-- public int size();
+- public void push(Item item)
+- public Item pop()
+- public Item peek()
+- public boolean isEmpty()
+- public int size()
 
 ### Time Complexity
 - Insert: Average = Worst = O(1)
