@@ -50,21 +50,24 @@ public class LinkedList <Item> implements Iterable<Item>, ListAPI<Item> {
 			this.item = item;
 		}
 	}
-	
-	public void add(Item item) {
+
+	/**
+	 * <b>Insert</b><br>
+	 * Time:  Worst = Average = O(1)<br>
+	 * Space: Worst = 1 node = O(1) 
+	 */
+	public void add(Item item) { 
 		Node node = new Node(item);
-		if (first == null) {
-			first = node;
-		} else {		
-			Node current = first;
-			while (current.next != null) {
-				current = current.next;
-			}		
-			current.next = node;
-		}
+		node.next = first;
+		first = node;
 		size++;
 	}
-	
+
+	/**
+	 * <b>Search</b><br>
+	 * Time:  Average = Worst = O(n)<br>
+	 * Space: Worst = 1 node = O(1)
+	 */
 	public Item get(int index) {
 		if (index < 0 || index >= size) {
 			return null;
@@ -76,6 +79,11 @@ public class LinkedList <Item> implements Iterable<Item>, ListAPI<Item> {
 		return current.item;
 	}	
 	
+	/**
+	 * <b>Delete</b><br>
+	 * Time:  Average = Worst = O(n)<br>
+	 * Space: 1 node = O(1)
+	 */
 	public void delete(int index) {
 		if (index < 0 || index >= size) {
 			return;
@@ -90,6 +98,28 @@ public class LinkedList <Item> implements Iterable<Item>, ListAPI<Item> {
 			current.next = current.next.next;
 		}
 		size--;
+	}
+	
+	/**
+	 * <b>Delete</b><br>
+	 * Time:  Average = Worst = O(n)<br>
+	 * Space: Worst = 1 node = O(1)
+	 */
+	public void delete(Item item) {
+		if (first.item.equals(item)) {
+			first = null;
+			size--;
+			return;
+		}
+		
+		Node current = first;		
+		while (current.next != null) {
+			if (current.next.item.equals(item)) {
+				current.next = current.next.next;
+				size--;
+				return;
+			}			
+		}
 	}
 	
 	public boolean isEmpty() {
@@ -119,7 +149,7 @@ public class LinkedList <Item> implements Iterable<Item>, ListAPI<Item> {
 		private Node current = first;
 		@Override
 		public boolean hasNext() {
-			return current == null;
+			return current != null;
 		}
 
 		@Override
