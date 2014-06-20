@@ -7,7 +7,9 @@ package com.algomized.datastructures.graphs;
  * <p>
  * Traverses the vertices by the edges until reaches visited vertices. Then backtrack 
  * to the previous vertices and repeat the process until the item is found (search hit) 
- * or all the vertices are visited (search miss). 
+ * or all the vertices are visited (search miss).<br>
+ * <br>
+ * Implemented using recursive calls.
  * </p>
  *
  */
