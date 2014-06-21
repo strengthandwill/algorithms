@@ -1,5 +1,14 @@
 package com.algomized.datastructures.graphs;
 
+/**
+ * 
+ * @author Poh Kah Kong
+ * 
+ * <p> 
+ * Determines whether a graph is bipartite using Depth First Search.
+ * </p>
+ *
+ */
 public class Bipartite {
 	private boolean[] marked;
 	private boolean[] color;

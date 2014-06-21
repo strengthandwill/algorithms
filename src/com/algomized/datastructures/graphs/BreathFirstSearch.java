@@ -7,7 +7,7 @@ import com.algomized.datastructures.queues.Queue;
  * @author Poh Kah Kong
  * 
  * <p>
- * Transverses all the unvisited adjacent vertices of the target vertices,
+ * Transverses all the unvisited adjacent vertices of the target vertex,
  * followed by traverses all the unvisited adjacent vertices of the previously
  * visited vertices, thereby transversing the vertices layer by layer.<br>
  * <br>

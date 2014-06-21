@@ -7,7 +7,7 @@ import com.algomized.datastructures.linkedlists.LinkedList;
  * @author Poh Kah Kong
  * 
  * <p>
- * Each vertices can be linked to multiple vertices. Unidirectional 
+ * Each vertex can be linked to multiple vertices. Unidirectional 
  * such that v -> w = w -> v.<br>
  * <br>
  * Implemented using an array of adjacent lists which have low time complexity 

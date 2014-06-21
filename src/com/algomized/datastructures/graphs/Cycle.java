@@ -1,5 +1,13 @@
 package com.algomized.datastructures.graphs;
 
+/**
+ * 
+ * @author Poh Kah Kong
+ * 
+ * <p>
+ * Determines whether a graph has cycle(s) using Depth First Search.
+ *
+ */
 public class Cycle {
 	private boolean[] marked;
 	private boolean hasCycle = false;

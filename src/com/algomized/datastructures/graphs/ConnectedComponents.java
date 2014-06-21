@@ -1,5 +1,14 @@
 package com.algomized.datastructures.graphs;
 
+/**
+ * 
+ * @author Poh Kah Kong
+ * 
+ * <p>
+ * Determines whether a graph is connected using Depth First Search.
+ * </p>
+ *
+ */
 public class ConnectedComponents {
 	private boolean[] marked;
 	private int[] id;

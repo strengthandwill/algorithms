@@ -47,8 +47,8 @@ public class DepthFirstSearch {
 	
 	/**
 	 * <b>Depth First Search</b><br>
-	 * Time:  Average = N.A., Worst = O(|V| + |E|)<br>
-	 * Space: Worst = O(|V|) 
+	 * Time:  Worst = O(|V| + |E|)<br>
+	 * Space: Worst = O(|V|)
 	 */
 	private void dfs(Graph graph, int v) {
 		marked[v] = true;

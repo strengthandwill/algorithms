@@ -8,13 +8,13 @@ import com.algomized.datastructures.queues.Queue;
  * @author Poh Kah Kong
  *
  * <p>
- * Allows the use of non-integer item (e.g. String) as the vertices of the graph. Implemented using Graph 
- * where the vertices and edges are stored as integer. A symbol table is used to map the integer to
- * the item while a keys array is used to map the index to the item.
+ * Allows the use of non-integer item (e.g. String) as the vertices of the graph. Implemented by 
+ * extending Graph where the vertices and edges are stored as integer. A symbol table is used to 
+ * map the integer to the item while a keys array is used to map the index to the item.
  * </p>
  * 
  */
-public class SymbolGraph<Item> implements SymbolGraphAPI<Item> {
+public class SymbolGraph<Item> extends Graph implements SymbolGraphAPI<Item> {
 
 	public static void main(String[] args) {
 		String[] keys = {"ATL", "DEN", "DFW", "HOU", "JFK", "LAS", "LAX", "MCO", "ORD", "PHX"};
@@ -42,39 +42,30 @@ public class SymbolGraph<Item> implements SymbolGraphAPI<Item> {
 		System.out.println(sg.contains("JFK"));
 	}
 	
-	private Graph graph;
 	private SeparateChainingHashtable<Item, Integer> st; // Item -> index
 	private Item[] keys; // index -> Item
 	
 	public SymbolGraph(Item[] keys) {
+		super(keys.length);
 		st = new SeparateChainingHashtable<Item, Integer>();
 		this.keys = keys;
-		this.graph = new Graph(keys.length);
 		for (int i = 0; i < keys.length; i++) {
 			st.put(keys[i], i);
 		}				
 	}
 	
-	public int vertices() {
-		return graph.vertices();
-	}
-	
-	public int edges() {
-		return graph.edges();
-	}
-	
 	public void addEdge(Item v, Item w) {
-		graph.addEdge(index(v), index(w));
+		super.addEdge(index(v), index(w));
 	}
 	
 	public void deleteEdge(Item v, Item w) {
-		graph.deleteEdge(index(v), index(w));
+		super.deleteEdge(index(v), index(w));
 		
 	}
 	
 	public Iterable<Item> adj(Item v) {
 		Queue<Item> queue = new Queue<Item>();
-		for (int w : graph.adj(index(v))) {
+		for (int w : super.adj(index(v))) {
 			queue.enqueue(name(w));
 		}
 		return queue;
@@ -94,9 +85,9 @@ public class SymbolGraph<Item> implements SymbolGraphAPI<Item> {
 	
 	public String toString() {
 		StringBuffer strBuf = new StringBuffer();
-		for (int v = 0; v < graph.vertices(); v++) {
+		for (int v = 0; v < super.vertices(); v++) {
 			strBuf.append(name(v) + ": ");
-			for (int w : graph.adj(v)) {
+			for (int w : super.adj(v)) {
 				strBuf.append("[" + name(w) + "]");
 			}
 			strBuf.append("\n");

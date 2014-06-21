@@ -7,7 +7,7 @@ import com.algomized.datastructures.stacks.Stack;
  * @author Poh Kah Kong
  * 
  * <p>
- * Uses Depth First Search to find a path from source vertices s to vertices v.
+ * Uses Depth First Search to find a path from source vertex s to vertex v.
  * </p>
  *
  */

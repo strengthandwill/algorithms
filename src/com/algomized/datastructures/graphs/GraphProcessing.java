@@ -2,6 +2,15 @@ package com.algomized.datastructures.graphs;
 
 import java.util.Iterator;
 
+/**
+ * 
+ * @author Poh Kah Kong
+ * 
+ * <p>
+ * Some common graph processing methods.
+ * </p>
+ *
+ */
 public class GraphProcessing {
 
 	public static void main(String[] args) {

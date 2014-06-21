@@ -3,6 +3,13 @@ package com.algomized.datastructures.graphs;
 import com.algomized.datastructures.queues.Queue;
 import com.algomized.datastructures.stacks.Stack;
 
+/**
+ * 
+ * @author Poh Kah Kong
+ * 
+ * <p>Find the shortest path between two vertices using Breath First Search.
+ *
+ */
 public class BreathFirstPaths {
 	private final int s;
 	private boolean[] marked;
