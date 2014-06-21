@@ -13,40 +13,49 @@ package com.algomized.datastructures.graphs;
  * </p>
  *
  */
-public class DepthFirstSearch {
+public class DirectedDepthFirstSearch {
 	private boolean[] marked;
 	private int count;
 	
 	public static void main(String[] args) {
-		Graph graph = new Graph(13);
-		graph.addEdge(0, 5);
-		graph.addEdge(4, 3);
+		Digraph graph = new Digraph(13);
+		graph.addEdge(4, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 2);
+		graph.addEdge(6, 0);
 		graph.addEdge(0, 1);
-		graph.addEdge(9, 12);
-		graph.addEdge(6, 4);
-		graph.addEdge(5, 4);
-		graph.addEdge(0, 2);
+		graph.addEdge(2, 0);
 		graph.addEdge(11, 12);
+		graph.addEdge(12, 9);
 		graph.addEdge(9, 10);
-		graph.addEdge(0, 6);
-		graph.addEdge(7, 8);
 		graph.addEdge(9, 11);
-		graph.addEdge(5, 3);
+		graph.addEdge(8, 9);
+		graph.addEdge(10, 12);
+		graph.addEdge(11, 4);
+		graph.addEdge(4, 3);
+		graph.addEdge(3, 5);
+		graph.addEdge(7, 8);
+		graph.addEdge(8, 7);
+		graph.addEdge(5, 4);
+		graph.addEdge(0, 5);
+		graph.addEdge(6, 4);
+		graph.addEdge(6, 9);
+		graph.addEdge(7, 6);
 		System.out.println(graph.vertices());
 		System.out.println(graph.edges());
 		System.out.println(graph);
 		
-		DepthFirstSearch dfs = new DepthFirstSearch(graph, 0);	
+		DirectedDepthFirstSearch dfs = new DirectedDepthFirstSearch(graph, 0);	
 		System.out.println(dfs.count());
 	}
 	
-	public DepthFirstSearch(Graph graph, int s) {
-		marked = new boolean[graph.vertices()];
+	public DirectedDepthFirstSearch(Digraph graph, int s) {
+		this.marked = new boolean[graph.vertices()];
 		dfs(graph, s);
 	}
 	
-	public DepthFirstSearch(Graph graph, Iterable<Integer> ss) {
-		marked = new boolean[graph.vertices()];
+	public DirectedDepthFirstSearch(Digraph graph, Iterable<Integer> ss) {
+		this.marked = new boolean[graph.vertices()];
 		for (int s : ss) {
 			if (!marked[s]) {
 				dfs(graph, s);
@@ -59,7 +68,7 @@ public class DepthFirstSearch {
 	 * Time:  Worst = O(|V| + |E|)<br>
 	 * Space: Worst = O(|V|)
 	 */
-	private void dfs(Graph graph, int v) {
+	private void dfs(Digraph graph, int v) {
 		marked[v] = true;
 		count++;
 		for (int w : graph.adj(v)) {

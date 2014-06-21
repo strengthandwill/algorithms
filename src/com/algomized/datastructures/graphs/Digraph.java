@@ -7,8 +7,8 @@ import com.algomized.datastructures.linkedlists.LinkedList;
  * @author Poh Kah Kong
  * 
  * <p>
- * Each vertex can be linked to multiple vertices. Undirected such that 
- * v -> w = w -> v.<br>
+ * Each vertex can be linked to multiple vertices. Directed such that 
+ * v -> w != w -> v.<br>
  * <br>
  * Implemented using an array of adjacent lists which have low time complexity 
  * due to the use of array to allow fast search of the adjacent lists and 
@@ -18,38 +18,48 @@ import com.algomized.datastructures.linkedlists.LinkedList;
  * </p>
  *
  */
-public class Graph implements GraphAPI {
+public class Digraph implements GraphAPI {
+	private final int vertices;
+	private int edges = 0;
+	private LinkedList<Integer>[] adj;
+	
 	public static void main(String[] args) {
-		Graph graph = new Graph(13);
-		graph.addEdge(0, 5);
-		graph.addEdge(4, 3);
+		Digraph graph = new Digraph(13);
+		graph.addEdge(4, 2);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 2);
+		graph.addEdge(6, 0);
 		graph.addEdge(0, 1);
-		graph.addEdge(9, 12);
-		graph.addEdge(6, 4);
-		graph.addEdge(5, 4);
-		graph.addEdge(0, 2);
+		graph.addEdge(2, 0);
 		graph.addEdge(11, 12);
+		graph.addEdge(12, 9);
 		graph.addEdge(9, 10);
-		graph.addEdge(0, 6);
-		graph.addEdge(7, 8);
 		graph.addEdge(9, 11);
-		graph.addEdge(5, 3);
+		graph.addEdge(8, 9);
+		graph.addEdge(10, 12);
+		graph.addEdge(11, 4);
+		graph.addEdge(4, 3);
+		graph.addEdge(3, 5);
+		graph.addEdge(7, 8);
+		graph.addEdge(8, 7);
+		graph.addEdge(5, 4);
+		graph.addEdge(0, 5);
+		graph.addEdge(6, 4);
+		graph.addEdge(6, 9);
+		graph.addEdge(7, 6);
+
 		System.out.println(graph.vertices());
 		System.out.println(graph.edges());
 		System.out.println(graph);
 		
-		graph.deleteEdge(0, 2);
+		graph.deleteEdge(4, 2);
 		System.out.println(graph.vertices);
 		System.out.println(graph.edges);
 		System.out.println(graph);		
-	}
-	
-	private LinkedList<Integer>[] adj;
-	private final int vertices;
-	private int edges = 0;
+	}	
 	
 	@SuppressWarnings("unchecked")
-	public Graph(int vertices) {
+	public Digraph(int vertices) {
 		this.vertices = vertices;
 		adj = (LinkedList<Integer>[]) new LinkedList[vertices];
 		for (int i = 0; i < adj.length; i++) {
@@ -60,28 +70,27 @@ public class Graph implements GraphAPI {
 	public int vertices() {
 		return vertices;
 	}
-	
+
 	public int edges() {
 		return edges;
 	}
-	
+
 	/**
-	 * <b>Insert Edge</b><br>
-	 * Time:  Average = Worst = O(1)<br>
-	 * Space: Worst = O(1) 
+	 * <b>Insert Edge</b>
+	 * Time:  Worst = O(1)<br>
+	 * Space: Worst = O(1)
 	 */
 	public void addEdge(int v, int w) {
 		if (v < 0 || v >= vertices || w < 0 || w >= vertices) {
 			return;
 		}
 		adj[v].add(w);
-		adj[w].add(v);
 		edges++;
 	}
-	
+
 	/**
-	 * <b>Delete Edge</b><br>
-	 * Time:  Average = Worst = O(|E|)<br>
+	 * <b>Remove Edge</b>
+	 * Time:  Worst = O(|E|)<br>
 	 * Space: Worst = O(1)
 	 */
 	public void deleteEdge(int v, int w) {
@@ -89,19 +98,29 @@ public class Graph implements GraphAPI {
 			return;
 		}
 		adj[v].delete(new Integer(w));
-		adj[w].delete(new Integer(v));
 		edges--;
+	}
+
+	/**
+	 * Time:  Worst = O(1)<br>
+	 * Space: Worst = O(1)
+	 */
+	public Iterable<Integer> adj(int v) {
+		return adj[v];
 	}
 	
 	/**
-	 * Time:  Average = Worst = O(1)<br>
-	 * Space: Worst = O(1) 
+	 * Time:  Worst = O(|V| + |E|)<br>
+	 * Space: Worst = O(|V| + |E|)
 	 */
-	public Iterable<Integer> adj(int v) {
-		if (v < 0 || v >= vertices) {
-			return null;
+	public Digraph reverse() {
+		Digraph reverse = new Digraph(vertices);
+		for (int v = 0; v < adj.length; v++) {
+			for (int w : adj[v]) {
+				reverse.addEdge(w, v);
+			}
 		}
-		return adj[v];
+		return reverse;
 	}
 	
 	public String toString() {
@@ -109,7 +128,7 @@ public class Graph implements GraphAPI {
 		for (int i = 0; i < adj.length; i++) {
 			strBuf.append(i + ": ");
 			if (adj[i] != null) {
-				strBuf.append(i + ": " + adj[i] + "\n");
+				strBuf.append(adj[i].toString() + "\n");
 			}
 		}
 		return strBuf.toString();

@@ -49,11 +49,15 @@ public class Cycle {
 	 *  Space: Worst = O(|V|) 
 	 */
 	private void dfs(Graph graph, int v, int w) {
+		if (hasCycle()) {
+			return;
+		}
+		
 		marked[v] = true;
 		for (int x : graph.adj(v)) {					
 			if (!marked[x]) {
 				dfs(graph, x, v);
-			} else if (x != w) {
+			} else if (x != w) { // cycle found
 				hasCycle = true;
 			} 
 		}

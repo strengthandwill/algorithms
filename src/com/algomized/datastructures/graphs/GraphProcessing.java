@@ -57,7 +57,7 @@ public class GraphProcessing {
 	}
 	
 	/**
-	 * Time:  Worst = O(|V| * |E|)<br>
+	 * Time:  Worst = O(|V| + |E|)<br>
 	 * Space: Worst = 1 int = O(1) 
 	 */
 	public static int maxDegree(Graph graph) {
@@ -80,7 +80,7 @@ public class GraphProcessing {
 	}
 	
 	/**
-	 * Time:  Worst = O(|V| * |E|)<br>
+	 * Time:  Worst = O(|V| + |E|)<br>
 	 * Space: Worst = 1 int = O(1) 
 	 */
 	public static int numberOfSelfLoop(Graph graph) {
