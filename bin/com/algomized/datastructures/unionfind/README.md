@@ -17,11 +17,11 @@
 - Union: Average = O(log(n)), Worst = O(n)
 - Find:  Average = O(log(n)), Worst = O(n)
 
-#### Weighted Quick Find
+#### Weighted Quick Union
 - Union: Average = Worst = O(log(n))
 - Find:  Average = Worst = O(log(n))
 
-#### Weighted Quick Find with Path Compression
+#### Weighted Quick Union with Path Compression
 - Union: Average = Worst = ~ O(1)
 - Find:  Average = Worst = ~ O(1)
 
