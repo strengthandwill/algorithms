@@ -164,17 +164,19 @@ Approach 2
 
 Let's take 10 lockers, O for opened door and X for closed door.
 
-LK 1 2 3 4 5 6 7 8 9 10  
-01 O O O O O O O O O O  
-02 O X O X O X O X O X  
-03 O X X X O O O X X X  
-04 O X X O O O O O X X  
-05 O X X O X O O O X O  
-06 O X X O X X O O X O  
-07 O X X O X X X O X O  
-08 O X X O X X X X X O  
-09 O X X O X X X X O O  
-10 O X X O X X X X O X  
+<table>
+	<tr><td>LK</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>  
+	<tr><td>01</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr></td><td></td><td>
+	<tr><td>02</td><td>O</td><td>X</td><td>O</td><td>X</td><td>O</td><td>X</td><td>O</td><td>X</td><td>O</td><td>X</td></tr></td><td></td><td>
+	<tr><td>03</td><td>O</td><td>X</td><td>X</td><td>X</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td><td>X</td></tr></td><td></td><td>
+	<tr><td>04</td><td>O</td><td>X</td><td>X</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr></td><td></td><td>
+	<tr><td>05</td><td>O</td><td>X</td><td>X</td><td>O</td><td>X</td><td>O</td><td>O</td><td>O</td><td>X</td><td>O</td></tr></td><td></td><td>
+	<tr><td>06</td><td>O</td><td>X</td><td>X</td><td>O</td><td>X</td><td>X</td><td>O</td><td>O</td><td>X</td><td>O</td></tr></td><td></td><td>
+	<tr><td>07</td><td>O</td><td>X</td><td>X</td><td>O</td><td>X</td><td>X</td><td>X</td><td>O</td><td>X</td><td>O</td></tr></td><td></td><td>
+	<tr><td>08</td><td>O</td><td>X</td><td>X</td><td>O</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>O</td></tr></td><td></td><td>
+	<tr><td>09</td><td>O</td><td>X</td><td>X</td><td>O</td><td>X</td><td>X</td><td>X</td><td>X</td><td>O</td><td>O</td></tr></td><td></td><td>
+	<tr><td>10</td><td>O</td><td>X</td><td>X</td><td>O</td><td>X</td><td>X</td><td>X</td><td>X</td><td>O</td><td>X</td></tr></td><td></td><td>
+</table>
 
 From observation, for 10 lockers with 10 iterations, the opened doors are the squares numbers 
 that are smaller and equal to 10:
