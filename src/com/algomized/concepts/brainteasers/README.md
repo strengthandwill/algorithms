@@ -165,15 +165,15 @@ Approach 2
 Let's take 10 lockers, O for opened door and X for closed door.
 
 LK 1 2 3 4 5 6 7 8 9 10  
-1  O O O O O O O O O O  
-2  O X O X O X O X O X  
-3  O X X X O O O X X X  
-4  O X X O O O O O X X  
-5  O X X O X O O O X O  
-6  O X X O X X O O X O  
-7  O X X O X X X O X O  
-8  O X X O X X X X X O  
-9  O X X O X X X X O O  
+01 O O O O O O O O O O  
+02 O X O X O X O X O X  
+03 O X X X O O O X X X  
+04 O X X O O O O O X X  
+05 O X X O X O O O X O  
+06 O X X O X X O O X O  
+07 O X X O X X X O X O  
+08 O X X O X X X X X O  
+09 O X X O X X X X O O  
 10 O X X O X X X X O X  
 
 From observation, for 10 lockers with 10 iterations, the opened doors are the squares numbers 
