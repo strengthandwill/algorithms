@@ -16,6 +16,7 @@ import com.algomized.datastructures.ListAPI;
  * <br>
  * Space: Worst = O(n)
  * </p>
+ * 
  */
 public class ArrayList<Item> implements ListAPI<Item>, Iterable<Item> {
 	public static void main(String[] args) {
@@ -83,6 +84,23 @@ public class ArrayList<Item> implements ListAPI<Item>, Iterable<Item> {
 		shiftLeft(index);
 		if (size < buffer.length / 4) {
 			resize(buffer.length / 2);
+		}
+	}
+	
+	/**
+	 * <b>Delete</b><br>
+	 * Time:  Average = Worst = O(n) (Shifting)<br>
+	 * Space: Worst = O(n)
+	 */
+	public void delete(Item item) {
+		if (size == 0 || item == null) {
+			return;
+		}
+		for (int i = 0; i < size; i++) {
+			if (buffer[i].equals(item)) {
+				delete(i);
+				return;
+			}
 		}		
 	}
 	

@@ -1,11 +1,12 @@
 ## Brain Teasers
 
-###5 Approaches
+### Approaches
 1. Examplify
-2. Simplify and Generalize
-3. Pattern Matching
+2. Pattern Matching
+3. Simplify and Generalize
 4. Base Case and Build
-5. Worst Case Balancing
+5. Data Structure Brainstorm
+6. Worst Case Balancing
 
 ### CrackingTheCodingInterviewC6Q1
 
