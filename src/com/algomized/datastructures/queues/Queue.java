@@ -121,7 +121,7 @@ public class Queue<Item> implements QueueAPI<Item>, Iterable<Item> {
 		Node current = first;
 
 		public boolean hasNext() {
-			return first != null;
+			return current != null;
 		}
 
 		public Item next() {

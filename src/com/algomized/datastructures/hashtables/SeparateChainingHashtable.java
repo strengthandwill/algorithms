@@ -89,9 +89,12 @@ public class SeparateChainingHashtable<Key, Value> implements SymbolTableAPI<Key
 	public Iterable<Key> keys() {
 		Queue<Key> queue = new Queue<Key>();
 		for (int i = 0; i < sequentialSearchST.length; i++) {
-			for (Key key : sequentialSearchST[i].keys()) {
-				queue.enqueue(key);
-			}			
+			Iterable<Key> keys = sequentialSearchST[i].keys();
+			if (keys != null) {
+				for (Key key : keys) {
+					queue.enqueue(key);
+				}			
+			}
 		}
 		return queue;
 	}

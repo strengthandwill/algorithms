@@ -70,7 +70,24 @@ public class ArrayList<Item> implements ListAPI<Item>, Iterable<Item> {
 		}
 		buffer[size] = item;
 		size++;
-	}	
+	}
+	
+	/**
+	 * <b>Append</b><br>
+	 * Time:  Average = Worst = O(n)<br>
+	 * Space: Worst = O(n) (resizing)
+	 */
+	public void add(int index, Item item) {
+		if (size == 0 || index < 0 || index >= size) {
+			return;
+		}
+		if (size > buffer.length / 2) {
+			resize(buffer.length * 2);
+		}
+		shiftRight(index);
+		buffer[index] = item;
+		size++;
+	}		
 	
 	/**
 	 * <b>Delete</b><br>
@@ -115,13 +132,29 @@ public class ArrayList<Item> implements ListAPI<Item>, Iterable<Item> {
 		}
 		return buffer[index];
 	}
-		
+			
 	public boolean isEmpty() {
 		return size == 0;
 	}
 	
 	public int size() {
 		return size;
+	}
+	
+	/**
+	 * Time:  Average = Worst = O(n)<br>
+	 * Space: Worst = O(1)
+	 */
+	public boolean contains(Item item) {
+		if (size == 0 || item == null) {
+			return false;
+		}
+		for (int i = 0; i < size; i++) {
+			if (buffer[i].equals(item)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public String toString() {
