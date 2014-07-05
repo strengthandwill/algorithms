@@ -33,7 +33,7 @@ public class CourseaAlgorithmsInterviewQuestionsQ3 {
 		int i = 0, j = 0, k = b.length - 1;
 		while (true) {
 			int l;
-			if (j == 0) {
+			if (j == 0) { // move R pointer forward
 				String color;
 				while ((color = color(b, i)).equals("R")) {
 					i++;
@@ -44,7 +44,7 @@ public class CourseaAlgorithmsInterviewQuestionsQ3 {
 				} else { // color is B
 					l = i;
 				}
-			} else {
+			} else { // move W pointer forward
 				String color;
 				while ((color = color(b, j)).equals("W")) {
 					j++;
@@ -54,14 +54,14 @@ public class CourseaAlgorithmsInterviewQuestionsQ3 {
 					i++;
 					j++;
 					continue;
-				} else {
+				} else { // color is W
 					l = j;
 				}
 			}
-			while (color(b, k).equals("B")) {
+			while (color(b, k).equals("B")) { // move black pointer backward
 				k--;
 			}
-			if (l >= k) {
+			if (l >= k) { // is sorted
 				return;
 			}
 			swap(b, l, k);
