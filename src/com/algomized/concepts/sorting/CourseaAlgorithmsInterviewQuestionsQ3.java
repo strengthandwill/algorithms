@@ -1,4 +1,4 @@
-package com.algomized.concepts.objectoriented.sorting;
+package com.algomized.concepts.sorting;
 
 import java.util.Arrays;
 
