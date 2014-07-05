@@ -19,7 +19,7 @@ import java.util.Arrays;
  * </p>
  *
  */
-public class CourseaAlgorithmsInterviewQuestionsQ3 {
+public class CourseraAlgorithmsInterviewQuestionsQ3 {
 	public static void main(String[] args) {
 		String[] b = {"R", "B", "W", "R", "B", "W", "R", "B", "W"};
 		sort(b);
