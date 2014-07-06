@@ -31,40 +31,43 @@ public class CourseraAlgorithmsInterviewQuestionsQ3 {
 			return;
 		}
 		int i = 0, j = 0, k = b.length - 1;
-		while (true) {
-			int l;
+		while (i < k && j < k) {
+			String color;
 			if (j == 0) { // move R pointer forward
-				String color;
 				while ((color = color(b, i)).equals("R")) {
 					i++;
 				}
 				if (color.equals("W")) {
 					j = i + 1;
 					continue;
-				} else { // color is B
-					l = i;
 				}
 			} else { // move W pointer forward
-				String color;
 				while ((color = color(b, j)).equals("W")) {
 					j++;
 				}
 				if (color.equals("R")) {
-					swap(b, i, j);
-					i++;
-					j++;
+					swap(b, i++, j++);
 					continue;
-				} else { // color is W
-					l = j;
 				}
 			}
-			while (color(b, k).equals("B")) { // move black pointer backward
+			while ((color = color(b, k)).equals("B")) { // move black pointer backward
 				k--;
 			}
-			if (l >= k) { // is sorted
-				return;
+			if (j == 0) { // swapping with R			
+				if (color.equals("W")) {
+					swap(b, i, k--);	
+					j = i + 1;
+				} else {
+					swap(b, i++, k--);
+				}
+			} else { // swapping with W
+				if (color.equals("R")) {
+					swap(b, i++, k);
+					swap(b, k--, j++);
+				} else {
+					swap(b, j++, k--);
+				}
 			}
-			swap(b, l, k);
 		}
 	}
 	
