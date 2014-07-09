@@ -13,7 +13,7 @@ public class OnlineBookReaderSystem {
 	private UserManager userManager;
 	private Library library;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		OnlineBookReaderSystem obrs = new OnlineBookReaderSystem();
 		obrs.addUser(new User(1, "Adam"));
 		obrs.addUser(new User(2, "Bob"));
