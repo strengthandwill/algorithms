@@ -39,8 +39,20 @@ public class CrackingTheCodingInterviewC9Q6 {
 			r.add("()" + s);
 			r.add(s + "()");
 			r.add("(" + s + ")");
+			r.addAll(getInsertParenthesis(s));		
 		}
 		return r;
+	}
+	
+	private static Set<String> getInsertParenthesis(String str) {
+		Set<String> list = new HashSet<String>();
+		for (int i = 0, j = 0; j < str.length() / 2; j++) {
+			i = str.indexOf("(", i);
+			StringBuffer strBuf = new StringBuffer(str);
+			strBuf.insert(++i, "()");
+			list.add(strBuf.toString());
+		}				
+		return list;
 	}
 	
 	public static Set<String> getParenthesisIterative(int n) {
@@ -52,7 +64,8 @@ public class CrackingTheCodingInterviewC9Q6 {
 			for (String s : p) {
 				r.add("()" + s);
 				r.add(s + "()");
-				r.add("(" + s + ")");		
+				r.add("(" + s + ")");	
+				r.addAll(getInsertParenthesis(s));
 			}
 			p = r;
 		}
