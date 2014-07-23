@@ -86,3 +86,76 @@ allow extensive query of SQL DB to be performed via APIs. Web service allow clie
 and interact with the server easily over TCP/IP, enabling ease of implementation for the clients.   
 
 
+### CrackingTheCodingInterviewC10Q1
+
+How would you design the data structures for a very large social network like
+Facebook or Linkedln? Describe how you would design an algorithm to show
+the connection, or path, between two people (e.g., Me -> Bob -> Susan -> Jason
+-> You).
+
+Data Structure
+
+* The social network can be implemented using a graph data structure.
+* Vertex will represent the people and edge between vertices will represent they know each other.
+* The graph will be unidirectional since if person A know person B imply person B knows person A.
+* The graph will be a sparse one, most people only know people within their social circle only.
+* The graph can be implemented using an adjacent list since it will be sparse and changing frequently.
+* The key for the graph will be the person ID which will be unique. The value of the graph will be the details
+  of the person.
+* When there is a new user, a new personal details will be created and inserted into the graph by person ID.
+* When user delete his/her account, the vertex will not be deleted but disabled instead.
+* When user A add a new connection to user B, edge will be added from A to B and B to A.
+* When user A disconnect from user B, the edges will not be deleted but disabled instead.
+
+Dividing People into Machines
+
+* The data will need to be divided and store to reduce machine jumps to optimization searching of the graph.
+* Since people tend to have most friends within the same country, the data can be divided by country, 
+  where each machine will store data for each country.
+* If there is too many people for a country, the data can be further divided by states.
+* So each machine will have the graph of a country.
+* The app will have two lookup tables. The first (personID-to-machineID) lookup table to map the machine ID 
+  to the machines. The second (machines) lookup to map the personID to the machineID. 
+
+Showing Connection between Two People
+
+* breadth first search (BFS) of the graph will be performed to show the connection between two people.
+* First personID-to-machineID lookup table is used to determine machineID from source personID.
+* Then machines lookup table is used to determine the machine where the source person is stored.
+* From the machine, BFS is performed on the source person until destination person is reached. Along the way,
+  the person vertices can be in different machines.
+* A HashMap can be keep track which vertices are traverse during the BFS.
+
+
+### CrackingTheCodingInterviewC10Q3
+
+* 4 billion => 4 * (2 ^ 30) = 2 ^ 32
+* 1 int => 4 B
+* 4 billion int => 2 ^ 32 * 4 = 2 ^ 34 B
+* 1 GB = 2 ^ 30 B
+
+Approach #1 [Time: O(n) for each random number]
+No memory limitation
+1. Generate an non-negative integer number randomly.
+2. for each of the integer in the file, compare the integer with the generated integer.
+3. if found, repeat from 1.
+4. if loop complete with any found, return the generated integer.
+
+Memory limitation  
+1. Generate an non-negative integer number randomly.
+2. Read file from n * i to n * (i + 1) - 1, where n is the size of memory 
+2. for each of the integer in the file, compare the integer with the generated integer.
+3. if found, repeat from Step 1.
+4. if loop complete with no find, return increment i.
+5. if end of file is reached with no find, return generated integer.
+
+Approach #2 [Time: O(1) for each random number]
+* Build a bit vector where bit represent a non-negative integer.
+* int => 32 bits => 2 ^ 32 int => Need 2 ^ 32 bits in bit vector to represent.
+* 1 GB => 2 ^ 30 byte => 2 ^ 33 bits
+* Memory is able to hold bit vector to represent all the non-negative integer.
+* Bit vector is initialized with all bits having value of false.
+1. Generate an non-negative integer number randomly, n.
+2. Check nth bits of bit vector, if it is true repeat from Step 1
+3. Otherwise, set nth bit of bit vector to true and return the generated number.
+
