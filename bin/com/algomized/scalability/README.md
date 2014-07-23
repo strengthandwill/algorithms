@@ -119,7 +119,7 @@ Dividing People into Machines
 
 Showing Connection between Two People
 
-* breadth first search (BFS) of the graph will be performed to show the connection between two people.
+* Breadth first search (BFS) of the graph will be performed to show the connection between two people.
 * First personID-to-machineID lookup table is used to determine machineID from source personID.
 * Then machines lookup table is used to determine the machine where the source person is stored.
 * From the machine, BFS is performed on the source person until destination person is reached. Along the way,
@@ -127,35 +127,24 @@ Showing Connection between Two People
 * A HashMap can be keep track which vertices are traverse during the BFS.
 
 
-### CrackingTheCodingInterviewC10Q3
+### CrackingTheCodingInterviewC10Q5
 
-* 4 billion => 4 * (2 ^ 30) = 2 ^ 32
-* 1 int => 4 B
-* 4 billion int => 2 ^ 32 * 4 = 2 ^ 34 B
-* 1 GB = 2 ^ 30 B
+If you were designing a web crawler, how would you avoid getting into infinite
+loops?
 
-Approach #1 [Time: O(n) for each random number]
-No memory limitation
-1. Generate an non-negative integer number randomly.
-2. for each of the integer in the file, compare the integer with the generated integer.
-3. if found, repeat from 1.
-4. if loop complete with any found, return the generated integer.
+Avoiding Infinite Loops
+* Use a graph to represent where the web pages are the vertices and links are the edges.
+* To avoid getting into infinite loops, need to detect cycle
+* A HashTable can be used to store the visited pages, so only if a page is visited, it will not
+  be crawled again, therefore avoid infinite loops.
+* Since the web is huge, Breadth First Search will be used to crawl layer by layer from the source.
 
-Memory limitation  
-1. Generate an non-negative integer number randomly.
-2. Read file from n * i to n * (i + 1) - 1, where n is the size of memory 
-2. for each of the integer in the file, compare the integer with the generated integer.
-3. if found, repeat from Step 1.
-4. if loop complete with no find, return increment i.
-5. if end of file is reached with no find, return generated integer.
-
-Approach #2 [Time: O(1) for each random number]
-* Build a bit vector where bit represent a non-negative integer.
-* int => 32 bits => 2 ^ 32 int => Need 2 ^ 32 bits in bit vector to represent.
-* 1 GB => 2 ^ 30 byte => 2 ^ 33 bits
-* Memory is able to hold bit vector to represent all the non-negative integer.
-* Bit vector is initialized with all bits having value of false.
-1. Generate an non-negative integer number randomly, n.
-2. Check nth bits of bit vector, if it is true repeat from Step 1
-3. Otherwise, set nth bit of bit vector to true and return the generated number.
-
+Defining Visited Page
+* Hard to define whether a page is visited or not base on the url and/or content.
+* Many pages has dynamically generated url but are the same content.
+* Many pages has randomly generated but has the same url.
+* The problem can be solve by using signature and crawling with priority.
+* Divide a page into sections and record the signature for each section.
+* When arrive at a new url, count how many of the signatures are found. The lesser the signatures, 
+  the less "visited" the page is. So the crawler will go on to the next page which have the highest priority.
+* This will not complete the web, but it will prevent going into infinite loops. 
