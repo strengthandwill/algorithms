@@ -148,3 +148,61 @@ Defining Visited Page
 * When arrive at a new url, count how many of the signatures are found. The lesser the signatures, 
   the less "visited" the page is. So the crawler will go on to the next page which have the highest priority.
 * This will not complete the web, but it will prevent going into infinite loops. 
+
+
+### CrackingTheCodingInterviewC10Q6
+
+You have 10 billion URLs. How do you detect the duplicate documents? In this
+case, assume that "duplicate" means that the URLs are identical.
+
+* Each url: 100 chars = 400 bytes
+* 10 billion urls = 2 ^ 30 * 10 * 400 bytes = 4000 * 2 ^ 30 bytes ~= 2 ^ 40 bytes = 4 TB  
+* Url example: https://www.google.com.sg/  
+* Trimmed Url: google.com.sg
+
+Unlimited Memory
+1. Run the urls and add the trimmed url into a HashSet. For each iteration, if the HashSet contains the trimmed url, 
+   the url has duplicate, so print out the url.
+  
+Limited Memory (1 GB) 
+
+Approach #1: One Pass - No storage
+1. Run the urls and add the trimmed url into a HashSet while size < 250K. For each iteration, if the HashSet contains 
+   the trimmed url, the url has duplicate, so print out the url.
+2. When size > 250K, repeat Step 1 starting from the next of the last url, i, until the end and restart from
+   the front until the url i - 1. Repeat the process until HashSet contains the last url of the data.
+   
+Approach #2: Two Passes - Disk Storage
+1. First pass: Split the data into 4000 chucks of 1 GB and store to disk. One way is to use the hash value of the url 
+   and mod with 4000.
+2. Second pass: For each url and for each load file, load the file into the HashSet and the url for check with the HashSet 
+   for duplicates.
+
+Approach #3: Two Passes - Multiple Machines
+1. First pass: Split the data into 4000 chucks of 1 GB and send to 40 machines. One way is to use the hash value of the url
+   and mod with 4000.
+2. Second pass: For each url, send the url to each of the machine to check for duplicates.
+* Pro: Parallel processing which can cut down processing time.
+* Con: Too many machines which increase the complexity and may be hard to handle machine failure.
+
+
+### CrackingTheCodingInterviewC10Q7
+
+Imagine a web server for a simplified search engine. This system has 100
+machines to respond to search queries, which may then call out using
+processSearch(string query) to another cluster of machines to actually
+get the result. The machine which responds to a given query is chosen at
+random, so you can not guarantee that the same machine will always respond
+to the same request. The method processSearch is very expensive. Design
+a caching mechanism for the most recent queries. Be sure to explain how you
+would update the cache when data changes.
+
+Query -> 100 Query Machines (Cache) -> processSearch(String query) -> Search Machines
+
+1. Cache will have three column, query, lastModified and result.
+2. Query is sent to machine i, if query is in machine i cache, return result.
+3. If query is found in machine i cache, call isModified(lastModified). If is false, return the cache result. 
+   If is true, call processSearch() to get result and update result and lastMoified in machine i.
+4. If query is not found in machine i cache, call processSearch() to get result and store result and lastMoified 
+   in machine i.
+5. When the search machines found that the data is updated, it will update its last modified.   
